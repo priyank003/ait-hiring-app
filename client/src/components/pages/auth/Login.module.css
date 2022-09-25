@@ -1,0 +1,180 @@
+@import "../../UI/constant/vars.css";
+
+.login {
+  font-family: var(--font-primary);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+}
+.login-form {
+  background: rgb(255, 255, 255);
+  box-shadow: 0.7px 0.3px 5px rgba(0, 0, 0, 0.008),
+    1.7px 0.7px 11.9px rgba(0, 0, 0, 0.012),
+    3.3px 1.3px 22.4px rgba(0, 0, 0, 0.015),
+    5.8px 2.2px 40px rgba(0, 0, 0, 0.018),
+    10.9px 4.2px 74.8px rgba(0, 0, 0, 0.022),
+    26px 10px 179px rgba(0, 0, 0, 0.03);
+
+  width: fit-content;
+  border-radius: 20px;
+  width: 100%;
+
+  height: fit-content;
+  width: fit-content;
+}
+.login-form form {
+  border-radius: 20px;
+  background: white;
+  width: 600px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.form-div {
+  padding-bottom: 3rem;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form-input {
+  width: 70%;
+}
+
+.form-input div {
+  margin-top: 10px;
+}
+.form-heading {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.form-heading span {
+  color: var(--color-primary);
+}
+
+.form-div input,
+select {
+  font-size: 1rem;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+.form-div input:focus {
+  outline: none;
+  box-shadow: 0 2px rgba(120, 201, 167, 0.459);
+}
+
+.input-cedentials {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin-bottom: 2rem; */
+}
+
+.form-submit {
+  display: flex;
+  justify-content: center;
+}
+
+.form-submit button {
+  width: 100%;
+
+  height: 50px;
+  border-radius: 15px;
+  border: none;
+  color: white;
+  background: var(--color-primary);
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.input-dropdown {
+  margin-bottom: 3rem;
+}
+.input-dropdown select {
+  margin-top: 10px;
+}
+.input-dropdown label span {
+  font-size: 1.2rem;
+}
+
+.forgot-password p {
+  margin-top: 2rem;
+  cursor: pointer;
+  color: red;
+}
+.signup-req {
+  margin-top: 1rem;
+  display: flex;
+  align-self: flex-start;
+}
+.signup-req p {
+  margin: 0;
+  margin-right: 1rem;
+}
+.signup-req a {
+  margin: auto;
+  margin-left: 0;
+  text-decoration: none;
+}
+.form-submit a {
+  width: 100%;
+}
+.input-invalid {
+  background: #d3abab26;
+}
+.input_field {
+  margin: 10px 0;
+  padding: 0 3px;
+  flex: 1;
+  position: relative;
+}
+.input_field input {
+  padding-left: 5px;
+  width: 100%;
+}
+.input_field label {
+  width: 100%;
+}
+.eror-text {
+  color: red;
+}
+.form-submit button:disabled,
+.form-submit button:disabled:hover,
+.form-submit button:disabled:active {
+  cursor: not-allowed;
+  background-color: #b6fcb5;
+  color: white;
+}
+
+@media (max-width: 460px) {
+  .login {
+  }
+  .login-form {
+    margin: 10px;
+    width: 90%;
+  }
+  .login-form form {
+    width: 100%;
+  }
+  .form-div {
+    margin: 0;
+    width: 80%;
+    padding: 1rem;
+  }
+  .form-input {
+    width: 100%;
+    margin: 10px;
+  }
+}

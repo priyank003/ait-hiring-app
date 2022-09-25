@@ -1,0 +1,194 @@
+@import "../../UI/constant/vars.css";
+
+.signUp {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-family: var(--font-primary);
+
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.signup-form {
+  background: rgb(255, 255, 255);
+  box-shadow: 0.7px 0.3px 5px rgba(0, 0, 0, 0.008),
+    1.7px 0.7px 11.9px rgba(0, 0, 0, 0.012),
+    3.3px 1.3px 22.4px rgba(0, 0, 0, 0.015),
+    5.8px 2.2px 40px rgba(0, 0, 0, 0.018),
+    10.9px 4.2px 74.8px rgba(0, 0, 0, 0.022),
+    26px 10px 179px rgba(0, 0, 0, 0.03);
+
+  width: fit-content;
+  border-radius: 20px;
+  height: 100vh;
+
+  z-index: 1000;
+  height: fit-content;
+  width: fit-content;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.signup-form form {
+  border-radius: 20px;
+  width: 750px;
+  height: fit-content;
+  padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+.form-div {
+  padding: 2rem 10px;
+  /* border: 1px solid red; */
+  width: 90%;
+
+  margin: auto;
+}
+.form-heading {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+.form-heading span {
+  color: var(--color-primary);
+}
+.form-div input,
+select {
+  font-size: 1rem;
+  width: 40%;
+  padding: 10px 0;
+  border-radius: 5px;
+
+  border: 1px solid black;
+}
+.form-div input:focus {
+  outline: none;
+  box-shadow: 0 2px rgba(120, 201, 167, 0.459);
+}
+.input-name {
+  display: flex;
+  justify-content: space-between;
+}
+.input-name input:focus {
+  background: rgb(232, 232, 240);
+}
+
+.input-cedentials {
+  display: flex;
+  justify-content: space-between;
+}
+.input-study {
+  display: flex;
+  justify-content: center;
+}
+.input-study label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+}
+.input-study select {
+  font-size: 1rem;
+
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px 0 5px;
+  border: 1px solid black;
+}
+.input-study select:focus {
+  outline: none;
+  box-shadow: 0 2px rgba(120, 201, 167, 0.459);
+}
+.input-password {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.input-password input {
+  width: 100%;
+  padding: 10px 10px 10px;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+.form-input div {
+  margin-top: 20px;
+}
+
+.form-submit button {
+  margin-top: 30px;
+  width: 100%;
+  height: 50px;
+  border-radius: 15px;
+  border: none;
+  color: rgb(87, 80, 80);
+  background: var(--color-primary);
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.form-submit button:disabled,
+.form-submit button:disabled:hover,
+.form-submit button:disabled:active {
+  cursor: not-allowed;
+  background-color: #b6fcb5;
+  color: white;
+}
+.eror-text {
+  position: absolute;
+  font-size: 0.8rem;
+  color: red;
+}
+.input-invalid {
+  background: #d3abab26;
+}
+.input_field {
+  margin: 10px 0;
+  padding: 0 3px;
+  flex: 1;
+  position: relative;
+}
+.input_field input {
+  padding-left: 5px;
+  width: 100%;
+}
+.input_field label {
+  width: 100%;
+}
+
+@media (max-width: 460px) {
+  .signUp {
+    width: 90%;
+    margin: auto;
+  }
+  .signup-form {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .signup-form form {
+    box-sizing: border-box;
+    width: 80%;
+  }
+  .form-div {
+    box-sizing: border-box;
+    width: 100%;
+  }
+  .input-name {
+    flex-direction: column;
+  }
+  .input-name input {
+    margin-top: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .input-cedentials {
+    flex-direction: column;
+  }
+  .input-cedentials input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

@@ -1,0 +1,110 @@
+.dashBoardNav {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;
+  align-items: center;
+  padding-top: 20px;
+ 
+}
+@import url("https://fonts.googleapis.com/css2?family=Glory&family=Josefin+Sans&display=swap");
+
+.dashboard-nav-header {
+  font-family: "Josefin Sans", sans-serif;
+  color: var(--color-primary-font);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.dashboard-nav-header img {
+  width: 60px;
+}
+.dashboard-nav-header h1 {
+  font-size: 2rem;
+  margin: 0;
+  margin-left: 5px;
+}
+.dashboard-nav-links {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+
+  justify-content: space-evenly;
+}
+.nav-link {
+  width: 200px;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+.nav-link a {
+  font-size: 1.1rem;
+  color: rgb(107, 97, 97);
+}
+.active-link {
+  border-radius: 10px;
+
+  background: var(--color-primary-dark);
+  box-shadow: 0.1px 2.7px 2.2px rgba(0, 0, 0, 0.02),
+    0.3px 6.6px 5.3px rgba(0, 0, 0, 0.028),
+    0.6px 12.4px 10px rgba(0, 0, 0, 0.035),
+    1.1px 22.1px 17.9px rgba(0, 0, 0, 0.042),
+    2.1px 41.4px 33.4px rgba(0, 0, 0, 0.05), 5px 99px 80px rgba(0, 0, 0, 0.07);
+}
+.active-link a {
+  color: rgb(233, 227, 227);
+}
+.nav-top {
+  flex: 1;
+}
+.nav-bottom {
+  padding-bottom: 2rem;
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-end;
+
+  /* margin-top: 4rem; */
+}
+.dashboard-nav-img img {
+  width: 200px;
+}
+.dashboard-nav-logout {
+  margin-top: 1rem;
+  color: var(--color-primary-font);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dashboard-nav-logout img {
+  cursor: pointer;
+}
+.nav-link a {
+  text-decoration: none;
+}
+.dashboard-nav-links a {
+  text-decoration: none;
+}
+/* @media (max-width: 460px) {
+  .dashBoardNav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1000;
+    animation: showNav 1000ms ease-out;
+  }
+
+  @keyframes showNav {
+    from {
+      left: -100px;
+    }
+    to {
+      left: 0;
+    }
+  }
+} */

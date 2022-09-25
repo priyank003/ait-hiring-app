@@ -1,0 +1,95 @@
+@import "../../UI/constant/vars.css";
+.header {
+  margin: auto;
+  width: 85%;
+  /* border: 1px solid red; */
+  margin-top: 10px;
+  font-family: var(--font-primary);
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-container {
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Glory&family=Josefin+Sans&display=swap");
+
+.header-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header-brand h1 {
+  font-family: "Josefin Sans", sans-serif;
+  color: var(--color-primary-font);
+}
+
+.header-brand-img img {
+  width: 60px;
+}
+
+.auth-login {
+  border-radius: 10px;
+  border: 2px solid var(--color-primary-lite);
+
+  font-size: 1rem;
+  padding: 10px;
+
+  background: none;
+  color: var(--color-primary);
+  width: 90px;
+  cursor: pointer;
+}
+.auth-login:hover {
+  transform: scale(1.2);
+}
+
+.auth-signup {
+  background: var(--color-primary);
+  color: white;
+  width: 90px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid var(--color-primary);
+  margin-left: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.auth-signup:hover {
+  transform: scale(1.2);
+}
+
+/* below 460px screen width */
+@media (max-width: 460px) {
+  .header {
+    width: 100%;
+    height: fit-content;
+  }
+  .header-container {
+    padding: 20px;
+  }
+  .header-brand {
+    /* flex-direction: column; */
+  }
+  .header-brand img {
+    width: 60px;
+  }
+  .header-brand h1 {
+    font-size: 1rem;
+  }
+  .auth-login {
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    box-shadow: 0 0 5px var(--color-primary);
+  }
+  .auth-signup {
+    display: none;
+  }
+}

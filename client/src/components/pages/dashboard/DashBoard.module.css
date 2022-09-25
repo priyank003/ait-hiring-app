@@ -1,0 +1,161 @@
+@import "../../UI/constant/vars.css";
+.dashboard {
+  width: 100%;
+  /* margin-bottom: 2rem; */
+
+  font-family: var(--font-primary);
+  /* box-shadow: 0.7px 0.3px 5px rgba(0, 0, 0, 0.008),
+    1.7px 0.7px 11.9px rgba(0, 0, 0, 0.012),
+    3.3px 1.3px 22.4px rgba(0, 0, 0, 0.015),
+    5.8px 2.2px 40px rgba(0, 0, 0, 0.018),
+    10.9px 4.2px 74.8px rgba(0, 0, 0, 0.022),
+    26px 10px 179px rgba(0, 0, 0, 0.03); */
+
+  height: 100vh;
+  overflow-y: hidden;
+}
+.dashboard-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  background: var(--color-primary-bg);
+  /* border-radius: 25px; */
+}
+.dashboard-nav {
+  /* width: 30%; */
+}
+.dashboard-nav-container {
+  margin: 10px;
+}
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 25px;
+  width: 100%;
+}
+.dashboard-main-container {
+  display: flex;
+  height: 100%;
+  margin: 20px;
+  justify-content: space-between;
+}
+.main-left {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+  margin-right: 15px;
+  overflow-y: auto;
+}
+
+.main-right {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.dashboard-stats {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.dashboard-jobs {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-grow: 1;
+  background: white;
+  border-radius: 25px;
+  padding: 10px;
+}
+
+.dashboard-job-icon {
+  padding: 5px;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  background: var(--color-primary-lite);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-job-icon img {
+  width: 35px;
+}
+.dashboard-jobs-selections {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-grow: 1;
+  background: white;
+  border-radius: 25px;
+  padding: 10px;
+  margin-top: 10px;
+}
+.job-selection-icon {
+  padding: 5px;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  background: var(--color-primary-lite);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.job-selection-icon img {
+  width: 35px;
+}
+
+.dashboard-stats h2{
+  color: var(--color-primary-font);
+  font-size: 1.2rem;
+  margin: 0;
+  margin-left: 10px;
+}
+.dashboard-stats-container {
+  display: flex;
+  align-items: center;
+  width: 80%;
+
+}
+@media (min-width:800px) {
+  .dashboard{
+    overflow:hidden;
+  }
+  
+}
+@media (max-width: 1000px) {
+  .main-right {
+    width: 35%;
+  }
+}
+
+@media (max-width: 800px) {
+  
+  .dashboard-main {
+ 
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 10px;
+
+    align-items: center;
+  }
+
+  .main-right {
+    display: none;
+  }
+  .main-left {
+    width: 100%;
+    margin: 0;
+  }
+  .dashboard-main-container {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

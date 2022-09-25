@@ -1,0 +1,194 @@
+@import "../../UI/constant/vars.css";
+.landing {
+  margin: auto;
+  width: 85%;
+  position: relative;
+  /* border: 1px solid red; */
+  font-family: var(--font-primary);
+  color: var(--color-primary-font);
+}
+.landing-container {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-between;
+  height: 80vh;
+}
+.img-green-curve {
+  width: 80%;
+  position: absolute;
+  z-index: -1000;
+  top: -5rem;
+  right: -5rem;
+}
+.landing-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.landing-heading h3 {
+  font-size: 2.5rem;
+  margin-bottom: 0;
+  margin-top: 5rem;
+}
+.landing-heading h1 {
+  margin-top: 1rem;
+  font-size: 4.5rem;
+  font-weight: bolder;
+  line-height: 5rem;
+  margin-bottom: 0;
+}
+.landing-desc p {
+  margin-top: 2rem;
+  color: var(--color-primary-font-lite);
+  font-size: 1.2rem;
+}
+.landing-right {
+  flex: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icons-wrap {
+  position: relative;
+}
+.img-Resume,
+.img-Id,
+.img-RedChat,
+.img-YellowChat {
+  position: absolute;
+  z-index: 100;
+  width: 100px;
+}
+.img-Resume {
+  top: 23rem;
+  left: 8rem;
+  box-shadow: 0 0 10px rgb(190, 181, 181);
+  border-radius: 10px;
+}
+.img-RedChat {
+  top: 2rem;
+  left: 6rem;
+}
+.img-YellowChat {
+  left: 22rem;
+  top: -0.5rem;
+}
+.img-Id {
+  top: 15rem;
+  right: 5rem;
+  width: 150px;
+}
+.img-wrap {
+  margin-left: 7rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imgCollege {
+  width: 600px;
+
+  clip-path: circle(40.1% at 38% 49%);
+}
+.link-btn {
+  margin-top: 2rem;
+
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.8rem;
+  padding: 10px 20px;
+  font-family: var(--font-primary);
+  background: var(--color-secondary);
+  cursor: pointer;
+}
+.landing-placements {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.company-icon {
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.icon-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon-wrap img {
+  width: 200px;
+}
+.landing-right-footer-mobile {
+  display: none;
+}
+
+/* below 460px screen width */
+@media (max-width: 460px) {
+  .landing-container {
+    height: fit-content;
+    flex-wrap: nowrap;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .img-green-curve {
+    width: 100%;
+    left: 0;
+    top: 0rem;
+  }
+  .imgCollege {
+  }
+  .landing-right {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+  .icons-wrap {
+    /* border: 1px solid red; */
+    /* transform: scale(0.8); */
+    transform: scale(0.6);
+  }
+  .img-Resume {
+  }
+  .icons-wrap img {
+  }
+
+  .landing-heading h3 {
+    text-align: center;
+    margin-top: 0;
+  }
+  .landing-left {
+    margin-top: 6rem;
+    align-items: center;
+  }
+  .landing-heading h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 0;
+  }
+  .landing-desc {
+    margin-top: 1rem;
+  }
+  .landing-desc p {
+    text-align: center;
+  }
+  .landing-placements h1 {
+    text-align: center;
+  }
+  .company-icon {
+    flex-wrap: wrap;
+  }
+  .icon-wrap {
+    width: 250px;
+    height: 100px;
+    margin-bottom: 2rem;
+  }
+  .landing-right-footer-mobile {
+    display: block;
+  }
+}

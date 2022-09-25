@@ -1,0 +1,13 @@
+@import "../../UI/constant/vars.css";
+
+.highlights {
+  font-family: var(--font-primary);
+  margin-top: 5rem;
+}
+.highlights-heading {
+  margin-bottom: 5rem;
+}
+.highlights-heading h1 {
+  font-weight: 600;
+  color: var(--color-primary-font);
+}
