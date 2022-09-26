@@ -1,0 +1,157 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+  }
+  
+  .a {
+    color: #0984e3;
+    text-decoration: none;
+  }
+  
+  .app {
+    background-color: #ffffff;
+    color: #000;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: .8rem;
+    transition: all .5s;
+  }
+  
+  .login h1 {
+    text-align: center;
+    margin: -6rem 0 2rem;
+    font-size: 48px;
+  }
+  .login{
+    margin-top: 7rem;
+  }
+  
+  h2 {
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .theme-toggle i {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  
+  .theme-toggle {
+    text-align: center;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    width: 300px;
+    margin: auto;
+    box-shadow: 0px 0px 12px  #333;
+    border-radius: 8px;
+    background-color:  #fff;
+  }
+  
+  .top {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    border: 1px solid;
+    border-radius: 6px;
+    padding: 8px;
+  }
+  .top:hover{
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgb(190, 187, 187);
+    /* border: none; */
+  }
+  
+  .top i {
+    font-size: 1rem;
+    margin-top: 6px;
+  }
+  
+  .divider {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid  #000;
+    line-height: .1rem;
+    margin: 2rem 0;
+  }
+  
+  span {
+    padding: 0 10px;
+    background-color: white;
+  }
+  
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin: 8px 0;
+    font-weight: 600;
+  }
+  
+  input {
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    border: 1px solid #000;
+    background: #ffffff;
+    color: #000;
+  }
+  
+  .remember {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  input[type=checkbox]:checked {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .remember p {
+    padding-left: 8px;
+  }
+  
+  button {
+    background-color: #0984e3;
+    border: 1px solid #0984e3;
+    color: #fff;
+    margin: 16px 0;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    text-align:center;
+    /* width: 100%; */
+    font-size: .8rem;
+  }
+  
+  .create {
+    font-size: 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+  }

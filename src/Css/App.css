@@ -1,0 +1,167 @@
+*{
+  padding: 0;
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+}
+.btn{
+  font-size: 20px;
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: 1px;
+  background-color: #1B9CFC;
+  box-shadow: 2px 2px 5px #dff9fb;
+  width: 30%;
+  margin-left: 30px;
+}
+.btn:hover{
+  cursor: pointer;
+  background-color: #25CCF7;
+}
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  /* margin: 10px; */
+  background-color: #d1d8e0;
+  position:sticky;
+}
+.navbar a{
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.navbar-logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-logo img{
+  width: 12%;
+  height: 100%;
+  margin: 0 8px 0 8px;
+}
+.buttons{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 20%;
+}
+
+.Body{
+  /* border: 2px solid; */
+  /* margin: 50px; */
+  background-color: #dff9fb;
+  display: flex;
+  padding: 110px;
+  height: 40rem;
+}
+.body-head{
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  width: 70%;
+}
+.body-head h1{
+  padding: 30px 0 5px 30px;
+  font-weight: bolder;
+  font-size: 65px;
+}
+.body-head p{
+  padding: 3px 0px 15px 30px;
+  width: 80%;
+  font-size: 20px;
+}
+.body-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.body-img img{
+  width: 70%;
+  /* height: 50%; */
+  border-radius: 40%;
+}
+.comp{
+  /* border: 2px solid; */
+  margin: 10rem 0 5rem 0;
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; */
+}
+.comp h1{
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.Company{
+  padding: 0 0 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* flex-grow: unset; */
+  /* margin: 10rem 0 0 0; */
+  /* background-color: #f1f2f6; */
+}
+
+.Footer{
+  background-color: #dff9fb;
+  /* border: 2px solid; */
+  margin: 10rem 0 0 0;
+  height: 20rem;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+}
+.Footer h4{
+  font-size: 25px;
+  padding: 20px;
+}
+.footer{
+  padding: 20px;
+}
+.footer i{
+  font-size: 20px;
+  margin: 10px;
+}
+.footer i:hover{
+  color:#1B9CFC;
+}
+.Footer a{
+  text-decoration: none;
+}
+.link{
+  font-size: 15px;
+}
+.links{
+  display: flex;
+  flex-direction: column;
+}
+.links a{
+  margin: 10px 20px 0 20px;
+  font-size: 20pxpx;
+  color: black;
+}
+hr{
+  width: 80%;
+}
+
+.army h5{
+  font-size: 17px;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+}
+.army hr{
+  width: 100%;
+}
+
+.body-btn{
+  width: 90px;
+}
+.body-btn:hover{
+  background-color: #25CCF7;
+  border: none;
+}
