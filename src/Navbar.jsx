@@ -13,7 +13,7 @@ function Navbar() {
         </div></Link>
 
         <div className='buttons'>
-            <Link to="/login" style={{textDecoration:"none"}}><button className='body-btn' style={{fontWeight:"bold"}}>Login</button></Link>
+            <Link to="/login" style={{textDecoration:"none"}}><button className='body-btns' style={{fontWeight:"bold"}}>Login</button></Link>
             {/* <Button variant="contained">Register</Button> */}
             <Link to="/posts" style={{textDecoration:"none"}}><button className='body-btn' style={{fontWeight:"bold"}}>Posts</button></Link>
         </div>

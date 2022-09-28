@@ -1,7 +1,10 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;600&display=swap');
 *{
   padding: 0;
   margin: 0;
-  font-family: 'Nunito', sans-serif;
+  /* font-family: 'Nunito', sans-serif; */
+  font-family: 'Rubik', sans-serif;
 }
 .btn{
   font-size: 20px;
@@ -15,15 +18,18 @@
 }
 .btn:hover{
   cursor: pointer;
-  background-color: #25CCF7;
+  background-color: rgb(0, 107, 255);
+  /* color: black; */
 }
 .navbar{
   display: flex;
   justify-content: space-between;
   padding: 20px;
   /* margin: 10px; */
-  background-color: #d1d8e0;
-  position:sticky;
+  background-color: #f0f2f4;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
 }
 .navbar a{
   display: flex;
@@ -49,9 +55,9 @@
 }
 
 .Body{
-  /* border: 2px solid; */
-  /* margin: 50px; */
-  background-color: #dff9fb;
+  top: 5rem;
+  position: relative;
+  background-color: rgb(247, 250, 255);
   display: flex;
   padding: 110px;
   height: 40rem;
@@ -61,17 +67,19 @@
   flex-direction: column;
   /* align-items: center; */
   justify-content: center;
-  width: 70%;
+  width: 72%;
 }
 .body-head h1{
   padding: 30px 0 5px 30px;
   font-weight: bolder;
   font-size: 65px;
+  color: rgb(11, 53, 88);
 }
 .body-head p{
   padding: 3px 0px 15px 30px;
   width: 80%;
   font-size: 20px;
+  line-height: 30px;
 }
 .body-img{
   display: flex;
@@ -84,37 +92,31 @@
   border-radius: 40%;
 }
 .comp{
-  /* border: 2px solid; */
   margin: 10rem 0 5rem 0;
-  /* display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap; */
+ 
 }
 .comp h1{
   font-size: 50px;
   text-align: center;
   margin-bottom: 30px;
+  color: rgb(11, 53, 88);
 }
 .Company{
   padding: 0 0 0 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
-  /* flex-grow: unset; */
-  /* margin: 10rem 0 0 0; */
-  /* background-color: #f1f2f6; */
 }
 
 .Footer{
   background-color: #dff9fb;
   /* border: 2px solid; */
-  margin: 10rem 0 0 0;
+  margin: 20rem 0 0 0;
   height: 20rem;
   color: black;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .Footer h4{
   font-size: 25px;
@@ -150,9 +152,10 @@ hr{
 }
 
 .army h5{
-  font-size: 17px;
+  font-size: 15px;
   letter-spacing: 1px;
   padding: 10px 20px;
+  font-weight: lighter;
 }
 .army hr{
   width: 100%;
@@ -162,6 +165,22 @@ hr{
   width: 90px;
 }
 .body-btn:hover{
-  background-color: #25CCF7;
+  background-color: rgb(0, 107, 255);
+  /* color: black; */
   border: none;
+}
+.body-btns{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 90px;
+  background-color: unset;
+  border: none;
+  color: black;
+}
+.body-btns:hover{
+  color: rgb(0, 107, 255);;
+  background-color: unset;
+  border: none;
+  /* color: aqua; */
 }

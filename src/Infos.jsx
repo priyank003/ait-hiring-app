@@ -6,38 +6,38 @@ import google from "./Photos/pay.jpg";
 function Infos() {
   // {Info.map((infos , id)=>{
     return(
-      <div>
-        <h1 className='h1'>Our Some of Top Alumini's</h1>
+      <div style={{marginTop: "15rem"}}>
+        <h1 className='h1'> Some of Our Top Alumini's</h1>
       
           <div className='cards-info'>
             <Card
-            name="Abhisek"
+            name="Shubham Jeena"
             title="Programmer"
-            body="lorem 23jjasn aj nfajnf janfs senfwesfnse esf ffsn fse ne fefhsjfsnfk esfhsejk sfajefsn"
+            body="At AIMA , Mumbai"
             image={google}
             />
             <Card
-            name="Abhisek"
+            name="Sohardh Bhandari"
             title="Coder"
-            body="lorem 23jjasn aj nfajnf janfs senfwesfnse esf ffsn fse ne fefhsjfsnfk esfhsejk sfajefsn"
+            body="At Paytm , Banglore"
             image={google}
             />
             <Card
-            name="Abhisek"
-            title="helper"
-            body="lorem 23jjasn aj nfajnf janfs senfwesfnse esf ffsn fse ne fefhsjfsnfk esfhsejk sfajefsn"
+            name="Ankush Roy"
+            title="Web Developer"
+            body="At Turtle Mint , Pune"
             image={google}
             />
             <Card
-            name="Abhisek"
+            name="Dipesh Verma"
             title="Coder"
-            body="lorem 23jjasn aj nfajnf janfs senfwesfnse esf ffsn fse ne fefhsjfsnfk esfhsejk sfajefsn"
+            body="At Tally Solution  , Pune "
             image={google}
             />
             <Card
-            name="Abhisek"
-            title="Coder"
-            body="lorem 23jjasn aj nfajnf janfs senfwesfnse esf ffsn fse ne fefhsjfsnfk esfhsejk sfajefsn"
+            name="Aayush Kuhite"
+            title="Programmer"
+            body="At UBS , Hyderabad"
             image={google}
             />
           </div>

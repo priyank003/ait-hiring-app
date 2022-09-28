@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
+import {Link} from "react-router-dom";
 
 function Footer() {
   return (
     <div className='Footer'>
         <div>
             <h4>Ait Hiring Platform</h4>
+            <p style={{width:"50%" , marginLeft: "20px" , lineHeight: "25px"}}>We take the work out of connecting with others so you can accomplish more.</p>
+            <Link to="/login" style={{textDecoration:"none"}}><button className='btn' style={{fontWeight:"bold" , width:"31%" , height:"15%"}}>Get Started </button></Link>
         </div>
         <div className='army'>
             <h4>Army Institue of Technology</h4>
