@@ -1,0 +1,86 @@
+.info{
+    /* border: 2px solid; */
+    border-radius: 15px;
+    width: 25%;
+    height: 25rem;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* box-shadow :0px 1rem 1.5rem #7e7e7e; */
+    transition: box-shadow 800ms;
+    background-color: rgb(231 234 237);
+}
+.info:hover{
+    box-shadow :10px 10px 1.5rem rgb(231 234 237) , -10px -10px 1.5rem rgb(231 234 237);
+    cursor: pointer;
+    background-color: unset;
+}
+.info-head{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 15px;
+}
+.info-head h1{
+    margin-top: 10px;
+    color: rgb(11, 53, 88);
+}
+.info-head h3{
+    /* margin-bottom: 10px; */
+    /* border: 2px solid green; */
+    padding: 5px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+.info-head p{
+    width: 95%;
+    margin: 5px 0;
+    line-height: 25px;
+    /* font-weight: light; */
+}
+.info-img img{
+    width: 98%;
+}
+.info-img img{
+    width: 18rem;
+    margin: auto;
+    /* border: 2px solid; */
+    margin-top: 15px;
+}
+.cards-info{
+    display: flex;
+    padding: 20px;
+    /* margin: auto; */
+    justify-content: space-evenly;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.card-top{
+    width: 23rem;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+}
+.card-top i{
+    font-size: 30px;
+    /* margin-top: 13px; */
+}
+.card-top h1{
+    font-size: 25px;
+}
+.h1{
+    margin-left: 126px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    text-align: center;
+    color: rgb(11, 53, 88);
+}
+.card-top i{
+    color: black;
+}
+.card-top i:hover{
+    color: blueviolet;
+}
