@@ -3,12 +3,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 1rem;
+
   border-bottom: 1px solid rgb(207, 199, 199);
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 10px;
-  padding-bottom: 8px;
 }
 .post-icon {
   background: #a5d7d3;
@@ -34,6 +33,7 @@
 }
 .post-header h3 {
   color: var(--color-primary-font);
+  font-size: 1.2rem;
   font-weight: 500;
   margin-left: 20px;
 }
@@ -101,6 +101,25 @@
 }
 .post-content-area {
   padding: 12px 24px;
+}
+.post-delete-link {
+  color: red;
+  cursor: pointer;
+}
+.post-comment-area {
+  min-height: 40vh;
+  position: relative;
+
+  width: 100%;
+}
+.post-comment-input {
+  /* position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0; */
+}
+.post-comment-input textarea {
+  width: 100%;
 }
 
 @-webkit-keyframes fadeIn {

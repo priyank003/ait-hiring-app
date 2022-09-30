@@ -1,13 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import classes from "./Login.module.css";
 
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../store/auth-slice";
+
 import { useRef } from "react";
 import useInput from "../../../hooks/use-input";
 import Config from "../../../azure/auth/Config";
 import { PublicClientApplication } from "@azure/msal-browser";
+import { AuthContext } from "../../../context/auth-context";
 
 const Login = () => {
   let formIsValid = false;
@@ -44,11 +45,17 @@ const Login = () => {
   const selectInputRef = useRef();
   const loginHandler = (e) => {
     // eslint-disable-next-line
+    e.preventDefault();
+    window.open("http://localhost:8000/api/auth/outlook", "_self");
+    // const res = await fetch("http://localhost:4000/auth/google");
+    // console.log(res);
   };
 
   if (enteredEmailIsValid && enteredPasswordIsValid && enteredRoleIsValid) {
     formIsValid = true;
   }
+
+  const auth = useContext(AuthContext);
 
   return (
     <div className={classes.login}>
@@ -118,11 +125,10 @@ const Login = () => {
               </div>
 
               <div className={classes["form-submit"]}>
-                <Link to="/dashboard">
-                  <button onClick={loginHandler} disabled={!formIsValid}>
+                {/* <button onClick={loginHandler} disabled={!formIsValid}>
                     Log-in
-                  </button>
-                </Link>
+                  </button> */}
+                <button onClick={loginHandler}>Log-in with outlook</button>
               </div>
 
               <div className={classes["forgot-password"]}>

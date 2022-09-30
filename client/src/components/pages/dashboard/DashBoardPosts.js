@@ -8,31 +8,19 @@ const DashBoardPosts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const BASE_URL = "http://localhost:8000/api";
+
   const fetchPostsHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(
-        "https://placement-app-5408d-default-rtdb.firebaseio.com/notice.json"
-      );
+      const response = await fetch(`${BASE_URL}/posts/get`);
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
 
       const data = await response.json();
-
-      const loadedPosts = [];
-
-      for (const key in data) {
-        loadedPosts.push({
-          id: key,
-          title: data[key].title,
-          company: data[key].company,
-          notice: data[key].notice,
-        });
-      }
-
-      setPost(loadedPosts);
+      setPost(data.results);
     } catch (error) {
       setError(error.message);
     }
@@ -57,13 +45,7 @@ const DashBoardPosts = () => {
 
       <div className={classes["dashboard-notices"]}>
         {post.map((data) => {
-          return (
-            <DashBoardPost
-              title={data.title}
-              company={data.company}
-              notice={data.notice}
-            />
-          );
+          return <DashBoardPost postData={data} />;
         })}
       </div>
     </div>

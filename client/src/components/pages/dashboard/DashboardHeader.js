@@ -17,16 +17,16 @@ import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import useWindowDimensions from "../../../hooks/use-windowSize";
-import Tooltip from '@mui/material/Tooltip';
+import Tooltip from "@mui/material/Tooltip";
 import MenuIcon from "@mui/icons-material/Menu";
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
+import Avatar from "@mui/material/Avatar";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Divider from "@mui/material/Divider";
+import PersonAdd from "@mui/icons-material/PersonAdd";
+import Settings from "@mui/icons-material/Settings";
+import Logout from "@mui/icons-material/Logout";
 import AccountMenu from "./AccountMenu";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -65,7 +65,6 @@ const DashboardHeader = ({ onDrawerOpen, onDrawerClose, open }) => {
   }, [dispatch, width]);
 
   //login as student or admin
-  const userLogin = useSelector((state) => state.auth.loginAs);
 
   const [showHover, setShowHover] = useState(false);
 
@@ -89,15 +88,18 @@ const DashboardHeader = ({ onDrawerOpen, onDrawerClose, open }) => {
     })
     .replace(/ /g, "-");
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-   
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const userInfo = useSelector((state) => state.userInfo);
+ 
   return (
     <div className={classes["dashboard-main-header"]}>
       <div className={classes["header-top"]}>
@@ -124,7 +126,7 @@ const DashboardHeader = ({ onDrawerOpen, onDrawerClose, open }) => {
             </div>
           )}
         </div>
-        {userLogin === "admin" ? (
+        {userInfo.role === "admin" ? (
           <div className={classes["admin-create-post"]}>
             <div
               className={classes["svg-wrap"]}
@@ -156,20 +158,19 @@ const DashboardHeader = ({ onDrawerOpen, onDrawerClose, open }) => {
             <span>{formattedDate}</span>
           </div>
           <div className={classes["user-bar"]}>
-          <IconButton aria-label="cart">
+            <IconButton aria-label="cart">
               <StyledBadge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </StyledBadge>
             </IconButton>
-          {/* <div className={classes["user-profile"]}>
+            {/* <div className={classes["user-profile"]}>
         
 
             <Link to="/dashboard/account">
               <img src={userImg} alt="" />
             </Link>
           </div> */}
-          <AccountMenu/>
-      
+            <AccountMenu />
           </div>
         </div>
       </div>

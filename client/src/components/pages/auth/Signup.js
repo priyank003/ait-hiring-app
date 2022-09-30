@@ -31,7 +31,7 @@ const Signup = (props) => {
     valueChangeHandler: idChangeHandler,
     inputBlurHandler: idBlurHandler,
     // reset: resetIdInput,
-  } = useInput((value) => typeof value === Number);
+  } = useInput((value) => value !== "");
   const {
     value: enteredlastName,
     isValid: enteredLastNameIsValid,
@@ -89,27 +89,40 @@ const Signup = (props) => {
     // eslint-disable-next-line
     formIsValid = true;
   }
-  const formSubmissionHandler = (e) => {
-    e.preventDefault();
+  const baseURL = "http://localhost:8000/api/auth/register/";
 
-    if (!nameInputHasEror) {
-      return;
-    }
-    console.log("form submitted");
+  const formSubmissionHandler = async (e) => {
+    e.preventDefault();
+    const userData = {
+      username: enteredName,
+      lastname: enteredlastName,
+      firstname: enteredName,
+      password: enteredPassword,
+      year: enteredYear,
+      branch: enteredbranch,
+      email: enteredEmail,
+      registration: enteredId,
+    };
+    await fetch(baseURL, {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => console.log(res));
 
     resetNameInput();
   };
   //post request axios
 
-  const baseURL = "http://localhost:3001/signup";
   // eslint-disable-next-line
   const [post, setPost] = useState(null);
 
-  useEffect(() => {
-    axios.get(`${baseURL}/1`).then((response) => {
-      setPost(response.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get(`${baseURL}/1`).then((response) => {
+  //     setPost(response.data);
+  //   });
+  // }, []);
 
   function updatePost() {
     axios
@@ -132,7 +145,7 @@ const Signup = (props) => {
   return (
     <div className={classes.signUp}>
       <div className={classes["signup-form"]}>
-        <form action="/nemetrix" onSubmit={formSubmissionHandler}>
+        <form onSubmit={formSubmissionHandler}>
           <div className={classes["form-div"]}>
             <h1 className={classes["form-heading"]}>
               Sign <span>up</span>{" "}
@@ -282,13 +295,13 @@ const Signup = (props) => {
                   )}
                 </div>
               </div>
-              <Link to="/login">
-                <div className={classes["form-submit"]}>
-                  <button onClick={updatePost} disabled={!formIsValid}>
-                    Sign-up
-                  </button>
-                </div>
-              </Link>
+              {/* <Link to="/login"> */}
+              <div className={classes["form-submit"]}>
+                <button type="submit" disabled={!formIsValid}>
+                  Sign-up
+                </button>
+              </div>
+              {/* </Link> */}
             </div>
           </div>
         </form>

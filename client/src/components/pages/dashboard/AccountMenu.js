@@ -12,6 +12,8 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import userImg from "../../../assets/images/user/cheerful-curly-business-girl-wearing-glasses.jpg";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,6 +24,9 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const userInfo = useSelector((state) => state.userInfo);
+
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -34,8 +39,8 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }} src={userImg}>
-             
+            <Avatar sx={{ width: 32, height: 32, bgcolor: "#80c47f" }}>
+              {userInfo.email[0].toUpperCase()}
             </Avatar>
           </IconButton>
         </Tooltip>
@@ -75,25 +80,14 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
-          <Avatar /> Profile
-        </MenuItem>
+       <NavLink to="/dashboard/account">
         <MenuItem>
           <Avatar /> My account
         </MenuItem>
+        </NavLink>
         <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
+       
+  
         <MenuItem>
           <ListItemIcon>
             <Logout fontSize="small" />

@@ -5,6 +5,7 @@ import DashBoardPosts from "./DashBoardPosts";
 import Companies from "./Companies";
 import { Switch, Route } from "react-router-dom";
 import BasicTable from "./BasicTable";
+import Chat from "./chats/Chat";
 const DashBoardPages = () => {
   return (
     <React.Fragment>
@@ -16,14 +17,18 @@ const DashBoardPages = () => {
           <Analytics />
         </Route>
         <Route path="/dashboard/companies">
-          <BasicTable/>
+          <BasicTable />
+          {/* <Companies /> */}
+        </Route>
+        <Route path="/dashboard/chats">
+          <Chat />
           {/* <Companies /> */}
         </Route>
         <Route path="/dashboard">
           <DashBoardPosts />
         </Route>
       </Switch>
-      </React.Fragment>
+    </React.Fragment>
   );
 };
 

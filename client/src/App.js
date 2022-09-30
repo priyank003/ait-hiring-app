@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import "./App.css";
 import Header from "./components/pages/home/Header";
 import Landing from "./components/pages/home/Landing";
@@ -11,8 +11,8 @@ import { Switch, Route } from "react-router-dom";
 import Footer from "./components/pages/home/Footer";
 import Highlights from "./components/pages/home/Highlights";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { AuthContext } from "./context/auth-context";
 
-import { useState, useEffect } from "react";
 function App() {
   function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
@@ -40,36 +40,63 @@ function App() {
   }
   const { width } = useWindowDimensions();
 
+  const cookieValue = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("authToken="))
+    ?.split("=")[1];
+
+  const [isLogged, setLoggedIn] = useState(false);
+  const [cookie, setCookie] = useState("");
+
+  const login = useCallback(() => {
+    setLoggedIn(true);
+  }, []);
+
+  const logout = useCallback(() => {
+    setLoggedIn(false);
+  }, []);
+
+  const setCooki = () => {
+    setCookie(cookieValue);
+  };
+
+  console.log(process.env.BASE_URL);
+  const auth = useContext(AuthContext);
+
   return (
-    <div>
-      <div className="App">
-        <Switch>
-          <Route path="/signup">
-            <Header />
-            <Signup />
-          </Route>
+    <AuthContext.Provider
+      value={{ isLoggedIn: isLogged, cookie: cookie, login, logout, setCooki }}
+    >
+      <div>
+        <div className="App">
+          <Switch>
+            <Route path="/signup">
+              <Header />
+              <Signup />
+            </Route>
 
-          <Route path="/login">
-            <Header />
-            <Login />
-          </Route>
+            <Route path="/login">
+              <Header />
+              <Login />
+            </Route>
+            {/* {!auth.isLoggedIn && ( */}
+            <Route path="/dashboard">
+              <DashBoard />
+            </Route>
+            {/* // )} */}
 
-          <Route path="/dashboard">
-            <DashBoard />
-          </Route>
+            <Route path="/">
+              <Header />
+              <Landing />
 
-          <Route path="/">
-            <Header />
-            <Landing />
-
-            <Highlights />
-            <Footer/>
-            {width < 460 ? <Footer /> : ""}
-          </Route>
-        </Switch>
+              <Highlights />
+              <Footer />
+              {width < 460 ? <Footer /> : ""}
+            </Route>
+          </Switch>
+        </div>
       </div>
-     
-    </div>
+    </AuthContext.Provider>
   );
 }
 

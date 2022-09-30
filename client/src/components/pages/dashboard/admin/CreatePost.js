@@ -1,13 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import classes from "./CreatePost.module.css";
 import close from "../../../../assets/logos/close_black_24dp.svg";
 import ReactPlayer from "react-player";
 import { useState, useRef } from "react";
 import useInput from "../../../../hooks/use-input";
 import axios from "axios";
+import { AuthContext } from "../../../../context/auth-context";
+import { useSelector } from "react-redux";
+
 // import "firebase/storage";
 // import { storage, firebase } from "../../../../firebase";
-const CreatePost = (props) => {
+const CreatePost = ({ hideCreatePost }) => {
+  const auth = useContext(AuthContext);
   // const [editorText, setEditorText] = useState("");
   const [editorText, setEditorText] = useState("");
   const [shareImg, setShareImg] = useState("");
@@ -19,10 +23,6 @@ const CreatePost = (props) => {
     setShareImg("");
     setVideoLink("");
     setAssetArea(area);
-  };
-
-  const hideModal = () => {
-    props.hideCreatePost(true);
   };
 
   const handelChange = (e) => {
@@ -67,32 +67,30 @@ const CreatePost = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(enteredTitleIsValid && enteredEditorIsValid);
+    const notice = {
+      title: enteredTitle,
+      description: enteredEditor,
+    };
     addPostHandler(notice);
-    console.log(enteredTitle, enteredCompany, enteredEditor);
   };
+  const userCookie = useSelector((state) => state.userInfo.cookie);
 
+  const BASE_URL = "http://localhost:8000/api";
   async function addPostHandler(notice) {
-    const response = await fetch(
-      "https://placement-app-5408d-default-rtdb.firebaseio.com/notice.json",
-      {
-        method: "POST",
-        body: JSON.stringify(notice),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    console.log("creating post cookie", auth.cookie);
+    const response = await fetch(`${BASE_URL}/posts/create`, {
+      method: "POST",
+      body: JSON.stringify(notice),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userCookie}`,
+      },
+    });
     const noticeData = await response.json();
-    console.log(noticeData);
+    if (noticeData.status === "ok") {
+      hideCreatePost();
+    }
   }
-
-  const notice = {
-    title: enteredTitle,
-    company: enteredCompany,
-    notice: enteredEditor,
-    date: "",
-  };
 
   //image uploadfirebase
 
@@ -123,11 +121,11 @@ const CreatePost = (props) => {
           <h2>Create a Post</h2>
           <button>
             {" "}
-            <img src={close} alt="close" onClick={hideModal} />
+            <img src={close} alt="close" onClick={hideCreatePost} />
           </button>
         </div>
         <div className={classes["post-form"]}>
-          <form>
+          <form onSubmit={submitHandler}>
             <div className={classes["form-input"]}>
               {" "}
               <input
@@ -136,12 +134,12 @@ const CreatePost = (props) => {
                 onChange={titleChangeHandler}
                 value={enteredTitle}
               />
-              <input
+              {/* <input
                 type="text"
                 placeholder="concerned corporate"
                 onChange={companyChangeHandler}
                 value={enteredCompany}
-              />
+              /> */}
             </div>
 
             <div className={classes["content-area"]}>
@@ -180,7 +178,7 @@ const CreatePost = (props) => {
             </div>
 
             <button
-              onClick={submitHandler}
+              type="submit"
               className={classes["post-btn"]}
               // disabled={!formIsValid}
             >
