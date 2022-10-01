@@ -29,8 +29,7 @@ passport.use(
     {
       clientID: OUTLOOK_CLIENT_ID,
       clientSecret: OUTLOOK_CLIENT_SECRET,
-      callbackURL:
-        "https://ait-hiring-k4n3ywgp7-priyank003.vercel.app/auth/outlook/callback",
+      callbackURL: "/auth/outlook/callback",
     },
     async function (accessToken, refreshToken, profile, done) {
       // asynchronous verification, for effect...
