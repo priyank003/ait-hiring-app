@@ -39,7 +39,7 @@ app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "..", "..", "client", "build")));
+app.use(express.static(path.join(__dirname, "..", "build")));
 
 app.use(session({ secret: "notagoodsecret" }));
 

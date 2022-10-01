@@ -31,16 +31,25 @@ const httpGetConvTwoUsers = async (req, res) => {
     const conversation = await Conversation.findOne({
       members: { $all: [req.params.firstUserId, req.params.secondUserId] },
     });
+    console.log(conversation);
+    if (conversation == null) {
+      console.log(req.params.firstUserId, req.params.secondUserId);
+      const newConvo = new Conversation({
+        members: [req.params.firstUserId, req.params.secondUserId],
+      });
+
+      await newConvo.save();
+
+      return res.status(200).json(newConvo);
+    }
     res.status(200).json(conversation);
   } catch (err) {
     res.status(500).json(err);
   }
 };
 const httpGetUserData = async (req, res) => {
- 
   try {
     const user = await chatUsers.findOne({ userId: req.params.userId });
-   
 
     res.status(200).json(user);
   } catch (err) {

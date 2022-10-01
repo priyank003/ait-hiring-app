@@ -1,10 +1,10 @@
 import React from "react";
 import Account from "./Account";
-import Analytics from "./Analytics";
+
 import DashBoardPosts from "./DashBoardPosts";
-import Companies from "./Companies";
+
 import { Switch, Route } from "react-router-dom";
-import BasicTable from "./BasicTable";
+
 import Chat from "./chats/Chat";
 const DashBoardPages = () => {
   return (
@@ -13,13 +13,8 @@ const DashBoardPages = () => {
         <Route path="/dashboard/account">
           <Account />
         </Route>
-        <Route path="/dashboard/analytics">
-          <Analytics />
-        </Route>
-        <Route path="/dashboard/companies">
-          <BasicTable />
-          {/* <Companies /> */}
-        </Route>
+      
+      
         <Route path="/dashboard/chats">
           <Chat />
           {/* <Companies /> */}

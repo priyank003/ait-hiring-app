@@ -28,7 +28,7 @@ const Landing = () => {
           </div>
           <div className={classes["landing-desc"]}>
             <p>
-              Let us Match you with top tech companies <br /> looking to hire
+              Let us Match you with top Ait Alumni Startups <br /> looking to hire
               highly skilled Developers
             </p>
           </div>

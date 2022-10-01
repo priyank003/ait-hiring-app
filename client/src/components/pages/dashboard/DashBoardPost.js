@@ -7,6 +7,7 @@ import useInput from "../../../hooks/use-input";
 import { Button } from "@mui/material";
 import Comments from "./Comments";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 const DashBoardPost = ({ postData }) => {
   const BASE_URL = "http://localhost:8000/api";
   const [expand, setExpand] = useState(false);
@@ -102,7 +103,12 @@ const DashBoardPost = ({ postData }) => {
         <div className={classes["post-icon"]}>
           <img src={postIcon} alt="" />
         </div>
-        <h3>{postData.title}</h3>
+        <div className={classes["post__detail"]}>
+          <h3>{postData.title}</h3>
+         <NavLink to={`/dashboard/chats/:${postData.author.id}`}>
+          <span>posted by {postData.author.name}</span>
+          </NavLink>
+        </div>
       </div>
       <div className={classes["post-end"]}>
         <div className={classes["post-expand-link"]}>

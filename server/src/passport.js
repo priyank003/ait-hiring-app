@@ -42,7 +42,8 @@ passport.use(
       let role;
       if (
         String(profile.displayName).split(" ")[0] === "Alumni" ||
-        profile.emails[0].value === "priyankpatil_20195@aitpune.edu.in"
+        profile.emails[0].value === "priyankpatil_20195@aitpune.edu.in" ||
+        profile.emails[0].value === "manvainder_20164@aitpune.edu.in"
       ) {
         role = "admin";
       } else {
@@ -60,8 +61,6 @@ passport.use(
         process.env.JWTSecretKey,
         { expiresIn: "14d" }
       );
-      console.log("token", token);
-      console.log(profile);
 
       var user = {
         outlookId: profile.id,
@@ -70,19 +69,9 @@ passport.use(
         token,
         role,
       };
-      // console.log(profile);
-      // console.log("user", user);
-      // const userInfo = await axios.get(
-      //   `https://graph.microsoft/com/v1.0/users/79d815c1-a688-408d-ad4a-2aa83068f5fc`
-      // );
-      // // const userdata = await userInfo.json();
-      // console.log(userInfo);
 
-      // if (refreshToken) user.refreshToken = refreshToken;
-      // if (profile.MailboxGuid) user.mailboxGuid = profile.MailboxGuid;
       if (profile.Alias) user.alias = profile.Alias;
 
-      console.log(user);
       let error;
       try {
         await User.findOneAndUpdate(

@@ -42,7 +42,7 @@ const DashBoardNav = ({ onDrawerOpen, onDrawerClose, open }) => {
       <div className={classes["nav-top"]}>
         <div className={classes["dashboard-nav-header"]}>
           <img src={AIT} alt="" />
-          <h1>Placement cell</h1>
+          <h1>Hiring Cell</h1>
           {width < 1200 && (
             <IconButton onClick={handleDrawerClose}>
               <ChevronLeftIcon />
@@ -70,25 +70,9 @@ const DashBoardNav = ({ onDrawerOpen, onDrawerClose, open }) => {
             </div>
           </NavLink>
 
-          <NavLink
-            to="/dashboard/analytics"
-            activeClassName={classes["active-link"]}
-            onClick={hideSideNavHandler}
-          >
-            <div className={classes["nav-link"]}>
-              <a href="/qwww">Analytics</a>
-            </div>
-          </NavLink>
+        
 
-          <NavLink
-            to="/dashboard/companies"
-            activeClassName={classes["active-link"]}
-            onClick={hideSideNavHandler}
-          >
-            <div className={classes["nav-link"]}>
-              <a href="/ewwr">Companies</a>
-            </div>
-          </NavLink>
+        
 
           <NavLink
             to="/dashboard/chats"

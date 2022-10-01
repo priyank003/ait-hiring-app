@@ -18,7 +18,7 @@ const createPost = async (postObj) => {
 
 const getPosts = async () => {
   try {
-    return await Post.find();
+    return await Post.find().populate("author");
   } catch (err) {
     console.log(`Could not get posts ${err}`);
   }

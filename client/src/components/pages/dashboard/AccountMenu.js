@@ -80,14 +80,13 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-       <NavLink to="/dashboard/account">
-        <MenuItem>
-          <Avatar /> My account
-        </MenuItem>
+        <NavLink to="/dashboard/account">
+          <MenuItem>
+            <Avatar /> My account
+          </MenuItem>
         </NavLink>
         <Divider />
-       
-  
+
         <MenuItem>
           <ListItemIcon>
             <Logout fontSize="small" />

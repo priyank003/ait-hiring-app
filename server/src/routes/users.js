@@ -3,14 +3,13 @@ const router = express.Router();
 const User = require("../models/user/user.mongo");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const { httpGetAdminUsers } = require("../controller/users.controller");
+
 router.post("/register", async (req, res) => {
-  
   const { username, email, password } = req.body;
   const user = new User({ email, username });
-  
-  const registeredUser = await User.register(user, password);
 
-  
+  const registeredUser = await User.register(user, password);
 });
 
 router.get("/login/success", (req, res) => {
@@ -22,6 +21,11 @@ router.get("/login/success", (req, res) => {
       //   cookies: req.cookies
     });
   }
+});
+
+router.get("/logout", function (req, res) {
+  req.logout();
+  res.redirect("/");
 });
 
 router.get(
@@ -44,26 +48,11 @@ router.get(
   "/outlook/callback",
   passport.authenticate("windowslive", { failureRedirect: "/login" }),
   function (req, res) {
-    // jwt.sign(
-    //   { user: req.user },
-    //   "secretKey",
-    //   { expiresIn: "1h" },
-    //   (err, token) => {
-    //     if (err) {
-    //       return res.json({
-    //         token: null,
-    //       });
-    //     }
-
-    //     res.json({
-    //       token,
-    //     });
-    //   }
-    // );
-   
     res.cookie("authToken", req.user.token);
     res.redirect("/#/dashboard");
   }
 );
+
+router.get("/all-users", httpGetAdminUsers);
 
 module.exports = router;

@@ -60,7 +60,6 @@ function App() {
     setCookie(cookieValue);
   };
 
-  console.log(process.env.BASE_URL);
   const auth = useContext(AuthContext);
 
   return (
@@ -72,7 +71,7 @@ function App() {
           <Switch>
             <Route path="/signup">
               <Header />
-              <Signup />
+              {/* <Signup /> */}
             </Route>
 
             <Route path="/login">

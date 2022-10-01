@@ -12,16 +12,11 @@ import Typography from "@mui/material/Typography";
 import OnlineUser from "./OnlineUser";
 import { format, render, cancel, register } from "timeago.js";
 import ChatUser from "./ChatUser";
-import io from "socket.io-client";
+import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
-
-// const user = {
-//   userId: "18t8778678687613",
-//   userAvatar:
-//     "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80",
-//   userName: "Priyank",
-// };
-
+import AdminUsers from "./AdminUsers";
+import { useSearchParams } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 export default function Chat() {
   const BASE_URL = "http://localhost:8000/api";
 
@@ -31,6 +26,7 @@ export default function Chat() {
   const [receiver, setReceiver] = useState({});
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const [adminUsers, setAdminUsers] = useState([]);
 
   const socket = useRef();
 
@@ -43,7 +39,7 @@ export default function Chat() {
   });
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("ws://localhost:8000");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -61,11 +57,8 @@ export default function Chat() {
 
   useEffect(() => {
     socket.current.emit("adduser", user.userId);
-    socket.current.on("getUsers", (users) => {
-      console.log("hi");
-      console.log(users)
-    });
-  }, [user]);
+    socket.current.on("getUsers", (users) => {});
+  }, []);
 
   const {
     value: enteredEditor,
@@ -100,7 +93,11 @@ export default function Chat() {
 
       const recResData = await recResponse.json();
 
-      setUsers((prev) => [recResData]);
+      if (recResData !== null) {
+        setUsers((prev) => [recResData]);
+      } else {
+        setUsers([]);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -137,7 +134,7 @@ export default function Chat() {
 
   useEffect(() => {
     getAllConversations();
-  }, []);
+  }, [user]);
 
   const getConvTwoIds = async (receiverId) => {
     const response = await fetch(
@@ -164,10 +161,22 @@ export default function Chat() {
     getMessages(currentChat._id);
   }, [currentChat]);
 
+  const getAdminUsers = async () => {
+    const response = await fetch(`${BASE_URL}/auth/all-users`);
+    const responseData = await response.json();
+
+    setAdminUsers(responseData);
+  };
+
+  useEffect(() => {
+    getAdminUsers();
+  }, []);
+
   // useEffect(()=>{
   //   scrollRef.current?.scrollIntoView({behavior:'smooth'})
 
   // },[messages])
+  // console.log(adminUsers);
 
   return (
     <div className="chat__container">
@@ -176,22 +185,28 @@ export default function Chat() {
         <List
           sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
         >
-          {users.length ? (
-            users.map((user) => {
-              return (
-                <OnlineUser
-                  onlineUsers={onlineUsers}
-                  currentId={user.userId}
-                  user={user}
-                  onClick={chatBoxLoader}
-                />
-              );
-            })
-          ) : (
-            <div className="fallback__chat">
-              <h1>No online</h1>
-            </div>
-          )}
+          <h3 style={{ textAlign: "center" }}>Alumni's available</h3>
+          {users.length > 0
+            ? users.map((user) => {
+                return (
+                  <OnlineUser
+                    onlineUsers={onlineUsers}
+                    currentId={user.userId}
+                    user={user}
+                    onClick={chatBoxLoader}
+                  />
+                );
+              })
+            : adminUsers.map((user) => {
+                return (
+                  <AdminUsers
+                    adminUsers={adminUsers}
+                    currentId={user.userId}
+                    user={user}
+                    onClick={chatBoxLoader}
+                  />
+                );
+              })}
 
           {/* <ListItem alignItems="flex-start">
             <ListItemAvatar>

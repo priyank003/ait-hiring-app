@@ -21,6 +21,7 @@ function listen(io) {
 
     //take userId and socketId from user
     socket.on("addUser", (userId) => {
+      console.log("in add user")
       addUser(userId, socket.id);
       io.emit("getUsers", users);
     });

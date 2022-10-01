@@ -19,18 +19,18 @@ const Header = (props) => {
               <img src={AIT} alt="" />
             </div>
 
-            <h1>AIT Placement cell</h1>
+            <h1>AIT Hiring App</h1>
           </div>
         </Link>
 
         <div className={classes["header-nav"]}>
           <div className={classes["nav-auth"]}>
             <Link to="/login">
-              <button className={classes["auth-login"]}>Sign-in</button>
+              <button className={classes["auth-signup"]}>Sign-in</button>
             </Link>
-            <Link to="/signup">
+            {/* <Link to="/signup">
               <button className={classes["auth-signup"]}>Register</button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

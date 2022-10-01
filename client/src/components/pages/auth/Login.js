@@ -67,10 +67,10 @@ const Login = () => {
             </h1>
 
             <div className={classes["form-input"]}>
-              <div className={classes["signup-req"]}>
+              {/* <div className={classes["signup-req"]}>
                 <p>Not registered yet ?</p> <Link to="/signup"> Sign-up</Link>
-              </div>
-              <div className={classes["input-cedentials"]}>
+              </div> */}
+              {/* <div className={classes["input-cedentials"]}>
                 <div className={`col-12 ${classes["input_field"]}`}>
                   <input
                     type="email"
@@ -100,8 +100,8 @@ const Login = () => {
                     </p>
                   )}
                 </div>
-              </div>
-              <div className={classes["input-dropdown"]}>
+              </div> */}
+              {/* <div className={classes["input-dropdown"]}>
                 <div className={`col-12 ${classes["input_field"]}`}>
                   <label htmlFor="">
                     <span>Login as</span>
@@ -122,18 +122,18 @@ const Login = () => {
                     <p className={classes["eror-text"]}>select branch</p>
                   )}
                 </div>
-              </div>
+              </div> */}
 
               <div className={classes["form-submit"]}>
                 {/* <button onClick={loginHandler} disabled={!formIsValid}>
                     Log-in
                   </button> */}
-                <button onClick={loginHandler}>Log-in with outlook</button>
+                <button onClick={loginHandler}>Sign-in with outlook</button>
               </div>
 
-              <div className={classes["forgot-password"]}>
+              {/* <div className={classes["forgot-password"]}>
                 <p>Forgot your password ?</p>
-              </div>
+              </div> */}
             </div>
           </div>
         </form>
