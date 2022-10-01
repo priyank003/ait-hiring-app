@@ -18,7 +18,9 @@ const passportSetup = require("./passport");
 // cors({
 //   origin: "http://localhost:3000",
 // })
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(
+  cors({ origin: "https://ait-hiring-app.vercel.app/", credentials: true })
+);
 // app.use((req, res, next) => {
 //   res.setHeader("Access-Control-Allow-Origin", "*");
 //   res.setHeader(
