@@ -13,6 +13,7 @@ import { AuthContext } from "../../../context/auth-context";
 const Login = () => {
   let formIsValid = false;
   const dispatch = useDispatch();
+  const baseURL = "http://localhost:8000/api/auth/login";
 
   const {
     value: enteredEmail,
@@ -43,12 +44,30 @@ const Login = () => {
 
   const emailInputRef = useRef();
   const selectInputRef = useRef();
-  const loginHandler = (e) => {
+  const loginHandler = async (e) => {
     // eslint-disable-next-line
     e.preventDefault();
-    window.open("http://localhost:8000/api/auth/outlook", "_self");
-    // const res = await fetch("http://localhost:4000/auth/google");
-    // console.log(res);
+    // window.open(
+    //   "https://ait-hiring-app.vercel.app/api/auth/outlook/callback",
+    //   "_self"
+    // );
+
+    const userData = {
+      email: enteredEmail,
+      password: enteredPassword,
+    };
+
+    console.log(userData);
+
+    const response = await fetch("http://localhost:8000/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log(response);
   };
 
   if (enteredEmailIsValid && enteredPasswordIsValid && enteredRoleIsValid) {
@@ -67,10 +86,10 @@ const Login = () => {
             </h1>
 
             <div className={classes["form-input"]}>
-              {/* <div className={classes["signup-req"]}>
+              <div className={classes["signup-req"]}>
                 <p>Not registered yet ?</p> <Link to="/signup"> Sign-up</Link>
-              </div> */}
-              {/* <div className={classes["input-cedentials"]}>
+              </div>
+              <div className={classes["input-cedentials"]}>
                 <div className={`col-12 ${classes["input_field"]}`}>
                   <input
                     type="email"
@@ -100,8 +119,8 @@ const Login = () => {
                     </p>
                   )}
                 </div>
-              </div> */}
-              {/* <div className={classes["input-dropdown"]}>
+              </div>
+              <div className={classes["input-dropdown"]}>
                 <div className={`col-12 ${classes["input_field"]}`}>
                   <label htmlFor="">
                     <span>Login as</span>
@@ -122,18 +141,18 @@ const Login = () => {
                     <p className={classes["eror-text"]}>select branch</p>
                   )}
                 </div>
-              </div> */}
-
-              <div className={classes["form-submit"]}>
-                {/* <button onClick={loginHandler} disabled={!formIsValid}>
-                    Log-in
-                  </button> */}
-                <button onClick={loginHandler}>Sign-in with outlook</button>
               </div>
 
-              {/* <div className={classes["forgot-password"]}>
+              <div className={classes["form-submit"]}>
+                <button type="submit" disabled={!formIsValid}>
+                  Log-in
+                </button>
+                {/* <button onClick={loginHandler}>Sign-in with outlook</button> */}
+              </div>
+
+              <div className={classes["forgot-password"]}>
                 <p>Forgot your password ?</p>
-              </div> */}
+              </div>
             </div>
           </div>
         </form>

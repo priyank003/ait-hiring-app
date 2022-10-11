@@ -8,6 +8,7 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user/user.mongo");
 const session = require("express-session");
 const passportSetup = require("./passport");
+const flash = require("connect-flash");
 
 // const corsOptions = {
 //   origin: "http://localhost:3000",
@@ -19,7 +20,10 @@ const passportSetup = require("./passport");
 //   origin: "http://localhost:3000",
 // })
 app.use(
-  cors({ origin: "https://ait-hiring-app.vercel.app/", credentials: true })
+  cors({
+    origin: ["https://ait-hiring-app.vercel.app/", "http://localhost:3000"],
+    credentials: true,
+  })
 );
 // app.use((req, res, next) => {
 //   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -38,8 +42,9 @@ app.use(
 // });
 //security related middlewares
 // app.use(helmet());
-
+app.use(express.urlencoded());
 app.use(express.json());
+app.use(flash());
 
 app.use(express.static(path.join(__dirname, "..", "build")));
 
@@ -68,8 +73,10 @@ app.get("/fakeUser", async (req, res) => {
   const user = new User({
     email: "priyankcrjr7@gmail.com",
     username: "priyank003",
+    branch: "computer",
+    rollNo: "7344",
   });
-  const newUser = await User.register(user, "chicken");
+  const newUser = await User.register(user, "mypassword");
   res.send(newUser);
 });
 

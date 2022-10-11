@@ -23,15 +23,17 @@ const Account = () => {
           {/* <ImageUpload onInput={imageInputHandler} /> */}
           <div className={classes["user-img"]}>
             <NavLink to="/dashboard/chats">
-            <ChatIcon />
+              <ChatIcon />
             </NavLink>
           </div>
           <div className={classes["user-credentials"]}>
             <div className={classes["user-id"]}>
-              <h1>{userInfo.name.substring(0, 4)}</h1>
+              <h1>{userInfo.regId}</h1>
             </div>
             <div className={classes["user-name"]}>
-              <h1>{userInfo.name.substring(4)}</h1>
+              <h1>
+                {userInfo.username} {userInfo.lastname}
+              </h1>
             </div>
           </div>
         </div>

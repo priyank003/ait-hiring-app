@@ -62,61 +62,61 @@ const DashBoard = () => {
   }, [width]);
   const [user, setUser] = useState();
 
-  useEffect(() => {
-    const getUser = () => {
-      fetch("http://localhost:8000/api/auth/login/success", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) {
-            auth.login();
+  // useEffect(() => {
+  //   const getUser = () => {
+  //     fetch("http://localhost:8000/api/auth/login/success", {
+  //       method: "GET",
+  //       credentials: "include",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //         "Access-Control-Allow-Credentials": true,
+  //       },
+  //     })
+  //       .then((response) => {
+  //         if (response.status === 200) {
+  //           auth.login();
 
-            dispatch(userInfoActions.setUserInfoState());
-            return response.json();
-          }
-          throw new Error("authentication has been failed!");
-        })
-        .then((resObject) => {
-          // dispatch(userInfoActions.setUserState(resObject.user));
-          setUser(resObject.user);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getUser();
-  }, []);
+  //           dispatch(userInfoActions.setUserInfoState());
+  //           return response.json();
+  //         }
+  //         throw new Error("authentication has been failed!");
+  //       })
+  //       .then((resObject) => {
+  //         // dispatch(userInfoActions.setUserState(resObject.user));
+  //         setUser(resObject.user);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   };
+  //   getUser();
+  // }, []);
 
-  const cookieValue = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("authToken="))
-    ?.split("=")[1];
-  dispatch(
-    userInfoActions.setUserInfoState({
-      cookie: cookieValue,
-    })
-  );
+  // const cookieValue = document.cookie
+  //   .split("; ")
+  //   .find((row) => row.startsWith("authToken="))
+  //   ?.split("=")[1];
+  // dispatch(
+  //   userInfoActions.setUserInfoState({
+  //     cookie: cookieValue,
+  //   })
+  // );
 
-  const dataToken = cookieValue.split(".")[1];
-  const data = atob(dataToken);
+  // const dataToken = cookieValue.split(".")[1];
+  // const data = atob(dataToken);
 
-  const userdata = JSON.parse(data);
+  // const userdata = JSON.parse(data);
 
-  let dataObj = {
-    id: userdata.id,
-    name: userdata.name,
-    email: userdata.email,
-    cookie: cookieValue,
-    role: userdata.role,
-  };
+  // let dataObj = {
+  //   id: userdata.id,
+  //   name: userdata.name,
+  //   email: userdata.email,
+  //   cookie: cookieValue,
+  //   role: userdata.role,
+  // };
 
-  dispatch(userInfoActions.setUserInfoState(dataObj));
+  // dispatch(userInfoActions.setUserInfoState(dataObj));
 
   return (
     <div className={classes.dashboard}>

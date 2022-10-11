@@ -2,7 +2,7 @@ const https = require("https");
 const http = require("http");
 const fs = require("fs");
 const io = require("socket.io");
-const { loadChatUsers } = require("./src/models/chatUsers/chatUsers.modal");
+// const { loadChatUsers } = require("./src/models/chatUsers/chatUsers.modal");
 
 require("dotenv").config();
 
@@ -22,7 +22,7 @@ const socketSever = io(server, {
 const sockets = require("./src/socket");
 
 async function startServer() {
-  await loadChatUsers();
+  // await loadChatUsers();
   await mongoConnect();
   sockets.listen(socketSever);
 

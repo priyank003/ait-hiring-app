@@ -5,7 +5,7 @@ const {
   httpGetConversation,
   httpPostConversation,
   httpGetConvTwoUsers,
-  httpGetUserData
+  httpGetUserData,
 } = require("../controller/conversation.controller");
 
 //new conv
@@ -20,7 +20,6 @@ router.get("/:userId", httpGetConversation);
 
 router.get("/find/:firstUserId/:secondUserId", httpGetConvTwoUsers);
 
-router.get("/userdata/:userId",httpGetUserData)
-
+router.get("/userdata/:userId", httpGetUserData);
 
 module.exports = router;

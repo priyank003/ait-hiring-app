@@ -4,24 +4,78 @@ const User = require("../models/user/user.mongo");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const { httpGetAdminUsers } = require("../controller/users.controller");
+const catchAsync = require("../utils/catchAsync");
+const { v4: uuidv4 } = require("uuid");
+router.post(
+  "/register",
+  catchAsync(async (req, res) => {
+    try {
+      const {
+        username,
+        email,
+        lastname,
+        firstname,
+        year,
+        branch,
+        regId,
+        password,
+      } = req.body;
 
-router.post("/register", async (req, res) => {
-  const { username, email, password } = req.body;
-  const user = new User({ email, username });
+      const role = "student";
 
-  const registeredUser = await User.register(user, password);
+      const user = new User({
+        userId: uuidv4(),
+        username,
+        email,
+        lastname,
+        firstname,
+        year,
+        branch,
+        regId,
+        role,
+      });
+      const registeredUser = await User.register(user, password);
+
+      res.status(200).json({
+        status: "ok",
+        message: "successfully registerd",
+        user_data: {
+          username,
+          email,
+          lastname,
+          firstname,
+          year,
+          branch,
+          regId,
+          role,
+        },
+      });
+      console.log(registeredUser);
+    } catch (err) {
+      console.log(`Could not register user ${err}`);
+
+      res.status(403).json({
+        status: "not ok",
+        message: "not registred",
+      });
+    }
+  })
+);
+
+router.post("/login", passport.authenticate("local"), (req, res) => {
+  console.log("logged in");
 });
 
-router.get("/login/success", (req, res) => {
-  if (req.user) {
-    res.status(200).json({
-      success: true,
-      message: "successfull",
-      user: req.user,
-      //   cookies: req.cookies
-    });
-  }
-});
+// router.get("/login/success", (req, res) => {
+//   if (req.user) {
+//     res.status(200).json({
+//       success: true,
+//       message: "successfull",
+//       user: req.user,
+//       //   cookies: req.cookies
+//     });
+//   }
+// });
 
 router.get("/logout", function (req, res) {
   req.logout();

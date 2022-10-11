@@ -5,31 +5,58 @@ const JwtStrategy = require("passport-jwt").Strategy;
 const { ExtractJwt } = require("passport-jwt");
 const jwt = require("jsonwebtoken");
 const axios = require("axios").default;
-// const { Client } = require("@microsoft/microsoft-graph-client");
-// const {
-//   TokenCredentialAuthenticationProvider,
-// } = require("@microsoft/microsoft-graph-client/authProviders/azureTokenCredentials");
-// const { DeviceCodeCredential } = require("@azure/identity");
+const LocalStrategy = require("passport-local");
 
 var OUTLOOK_CLIENT_ID = "8e27b95a-8a07-474c-ad82-a4440d2fafbe";
 var OUTLOOK_CLIENT_SECRET = "9jb8Q~Cq6CTjiIcNbmnEJf4.epqixr91rR2Tka93";
 var scope = "https%3A%2F%2Fgraph.microsoft.com%2F.default";
 var tenant_id = "6d28e4fb-9074-4a0b-a5b8-9a89f632cc60";
 
-passport.serializeUser(function (user, done) {
-  done(null, user);
-});
+// passport.use(
+//   new LocalStrategy(
+//     { usernameField: "email", passwordField: "password" },
+//     async function (email, password, done) {
+//       User.findOne({ email: email }, function (err, user) {
+//         console.log(user)
+//         if (err) {
+//           return done(err);
+//         }
+//         if (!user) {
+//           return done(null, false);
+//         }
+//         if (!user.verifyPassword(password)) {
+//           return done(null, false);
+//         }
+//         return done(null, user);
+//       }).select("+hash +salt");
+//     }
+//   )
+// );
 
-passport.deserializeUser(function (obj, done) {
-  done(null, obj);
-});
+passport.use(new LocalStrategy(User.authenticate()));
+
+//how do we store user in session
+passport.serializeUser(User.serializeUser());
+
+//how to get user out of session
+
+passport.deserializeUser(User.deserializeUser());
+
+// passport.serializeUser(function (user, done) {
+//   done(null, user);
+// });
+
+// passport.deserializeUser(function (obj, done) {
+//   done(null, obj);
+// });
 
 passport.use(
   new OutlookStrategy(
     {
       clientID: OUTLOOK_CLIENT_ID,
       clientSecret: OUTLOOK_CLIENT_SECRET,
-      callbackURL: "/auth/outlook/callback",
+      callbackURL:
+        "https://ait-hiring-app.vercel.app/api/auth/outlook/callback",
     },
     async function (accessToken, refreshToken, profile, done) {
       // asynchronous verification, for effect...

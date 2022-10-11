@@ -28,9 +28,9 @@ const Header = (props) => {
             <Link to="/login">
               <button className={classes["auth-signup"]}>Sign-in</button>
             </Link>
-            {/* <Link to="/signup">
+            <Link to="/signup">
               <button className={classes["auth-signup"]}>Register</button>
-            </Link> */}
+            </Link>
           </div>
         </div>
       </div>

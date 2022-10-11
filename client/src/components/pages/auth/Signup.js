@@ -4,8 +4,13 @@ import classes from "./Signup.module.css";
 import useInput from "../../../hooks/use-input";
 import axios from "axios";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { userInfoActions } from "../../../store/userInfo-slice";
+import { useDispatch } from "react-redux";
 const Signup = (props) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   const {
     value: enteredName,
     isValid: enteredNameIsValid,
@@ -101,17 +106,24 @@ const Signup = (props) => {
       year: enteredYear,
       branch: enteredbranch,
       email: enteredEmail,
-      registration: enteredId,
+      regId: enteredId,
     };
-    await fetch(baseURL, {
+    const response = await fetch(baseURL, {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => console.log(res));
+    });
+    console.log(response)
+    if (response.ok === true) {
+      const resData = await response.json();
+      console.log(resData.user_data)
+      dispatch(userInfoActions.setUserInfoState(resData.user_data));
+      history.push("/dashboard");
+    }
 
-    resetNameInput();
+    // resetNameInput();
   };
   //post request axios
 

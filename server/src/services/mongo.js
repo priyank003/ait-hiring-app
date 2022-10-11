@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const MONGO_URL =
-  "mongodb+srv://mongo:mongo@cluster0.n2v8opz.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://mongo:mongo@cluster0.vdcdngl.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connection.once("open", () => {
   console.log("MongoDB connection ready !");
