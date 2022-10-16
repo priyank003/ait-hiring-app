@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install-server": "npm install ./server",
-    "install-client": "npm install ./client",
+    "install-server": "npm install --prefix server",
+    "install-client": "npm install --prefix client",
     "install": "npm run install-server && npm run install-client",
     "server": " npm run watch --prefix server",
     "client": "npm start --prefix client",
@@ -24,9 +24,5 @@
   "bugs": {
     "url": "https://github.com/priyank003/ait-hiring-app/issues"
   },
-  "homepage": "https://github.com/priyank003/ait-hiring-app#readme",
-  "dependencies": {
-    "concurrently": "^7.4.0",
-    "server": "file:server"
-  }
+  "homepage": "https://github.com/priyank003/ait-hiring-app#readme"
 }
