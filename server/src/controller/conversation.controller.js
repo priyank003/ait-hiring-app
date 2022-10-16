@@ -31,9 +31,9 @@ const httpGetConvTwoUsers = async (req, res) => {
     const conversation = await Conversation.findOne({
       members: { $all: [req.params.firstUserId, req.params.secondUserId] },
     });
-    console.log(conversation);
+
     if (conversation == null) {
-      console.log(req.params.firstUserId, req.params.secondUserId);
+   
       const newConvo = new Conversation({
         members: [req.params.firstUserId, req.params.secondUserId],
       });

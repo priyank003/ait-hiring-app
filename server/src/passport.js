@@ -33,7 +33,9 @@ var tenant_id = "6d28e4fb-9074-4a0b-a5b8-9a89f632cc60";
 //   )
 // );
 
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy({
+  usernameField: 'email'
+},User.authenticate()));
 
 //how do we store user in session
 passport.serializeUser(User.serializeUser());
@@ -138,45 +140,45 @@ passport.use(
   )
 );
 
-var graphAccessUrl =
-  "https://login.microsoftonline.com/" + tenant_id + "/oauth2/v2.0/token";
-var graphTokenBody =
-  "client_id=" +
-  OUTLOOK_CLIENT_ID +
-  "&scope=" +
-  scope +
-  "&client_secret=" +
-  OUTLOOK_CLIENT_SECRET +
-  "&grant_type=client_credentials";
+// var graphAccessUrl =
+//   "https://login.microsoftonline.com/" + tenant_id + "/oauth2/v2.0/token";
+// var graphTokenBody =
+//   "client_id=" +
+//   OUTLOOK_CLIENT_ID +
+//   "&scope=" +
+//   scope +
+//   "&client_secret=" +
+//   OUTLOOK_CLIENT_SECRET +
+//   "&grant_type=client_credentials";
 
-var contentType = "application/x-www-form-urlencoded; charset=utf-8";
-var graphTokenError = "Failed to get graph token";
-var graphToken = "";
+// var contentType = "application/x-www-form-urlencoded; charset=utf-8";
+// var graphTokenError = "Failed to get graph token";
+// var graphToken = "";
 
-//Call the get token method
-getToken(graphAccessUrl, contentType, graphTokenBody, graphTokenError);
-//This method is using to get the token from the graph token url and body
-async function getToken(url, type, content, errorMessage, callback) {
-  var options = {
-    headers: {
-      "Content-Type": type,
-    },
-    body: content,
-  };
+// //Call the get token method
+// getToken(graphAccessUrl, contentType, graphTokenBody, graphTokenError);
+// //This method is using to get the token from the graph token url and body
+// async function getToken(url, type, content, errorMessage, callback) {
+//   var options = {
+//     headers: {
+//       "Content-Type": type,
+//     },
+//     body: content,
+//   };
 
-  //Posting access parameters to the server
-  var tokenResponse = await axios.get(url, options);
+//   //Posting access parameters to the server
+//   var tokenResponse = await axios.get(url, options);
 
-  if (tokenResponse.statusCode === 200) {
-    error = errorMessage;
-    if (errorMessage === graphTokenError) {
-      var token = JSON.parse(tokenResponse.body.toString("utf-8"));
-      graphToken = token.access_token;
-    }
-    if (callback) {
-      return callback();
-    }
-  } else {
-    console.log(errorMessage);
-  }
-}
+//   if (tokenResponse.statusCode === 200) {
+//     error = errorMessage;
+//     if (errorMessage === graphTokenError) {
+//       var token = JSON.parse(tokenResponse.body.toString("utf-8"));
+//       graphToken = token.access_token;
+//     }
+//     if (callback) {
+//       return callback();
+//     }
+//   } else {
+//     console.log(errorMessage);
+//   }
+// }

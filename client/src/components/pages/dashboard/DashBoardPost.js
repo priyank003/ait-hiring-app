@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "./DashBoardPost.module.css";
 import postIcon from "../../../assets/logos/noticeIcon.svg";
 import close from "../../../assets/logos/close_black_24dp.svg";
@@ -8,11 +8,15 @@ import { Button } from "@mui/material";
 import Comments from "./Comments";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../../context/auth-context";
 const DashBoardPost = ({ postData }) => {
-  const BASE_URL = "http://localhost:8000/api";
+  const auth = useContext(AuthContext);
+
+  const userInfo = useSelector((state) => state.userInfo);
   const [expand, setExpand] = useState(false);
   const [postTime, setpostTime] = useState({});
   const [comments, setComments] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   const openHandler = (e) => {
     e.preventDefault();
@@ -46,12 +50,16 @@ const DashBoardPost = ({ postData }) => {
     getTime(time, month, day);
   }, [postData]);
 
-  const deleteHandler = async () => {
-    await fetch(`${BASE_URL}/posts/delete/${postData.postId}`, {
-      method: "DELETE",
-    }).then((res) => {
-      console.log(res);
-    });
+  const deletePostHandler = async () => {
+    await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/posts/delete/${postData.postId}/${postData.author.userId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${auth.token}`,
+        },
+      }
+    ).then((res) => {});
   };
   const {
     value: enteredEditor,
@@ -61,30 +69,37 @@ const DashBoardPost = ({ postData }) => {
     inputBlurHandler: editorBlurHandler,
     reset: resetEditorInput,
   } = useInput((value) => value.trim() !== "");
-  const userCookie = useSelector((state) => state.userInfo.cookie);
 
   const commentSubmitHandler = async (e) => {
     const commentObj = {
       description: enteredEditor,
+      author: userInfo.userId,
     };
     e.preventDefault();
-    console.log("commenting");
-    await fetch(`${BASE_URL}/posts/comment/${postData.postId}`, {
-      method: "post",
-      body: JSON.stringify(commentObj),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userCookie}`,
-      },
-    }).then((res) => {
-      console.log(res);
+
+    await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/posts/comment/${postData.postId}`,
+      {
+        method: "post",
+        body: JSON.stringify(commentObj),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.token,
+        },
+      }
+    ).then((res) => {
+      setRefresh((prev) => !prev);
     });
   };
 
   const getComments = async () => {
-    console.log("getting comments");
     const response = await fetch(
-      `${BASE_URL}/posts/allcomments/${postData.postId}`
+      `${process.env.REACT_APP_BACKEND_URL}/posts/allcomments/${postData.postId}`,
+      {
+        headers: {
+          Authorization: "Bearer " + auth.token,
+        },
+      }
     );
     const resData = await response.json();
 
@@ -93,9 +108,11 @@ const DashBoardPost = ({ postData }) => {
 
   useEffect(() => {
     getComments();
-  }, []);
+  }, [refresh]);
 
-  const userInfo = useSelector((state) => state.userInfo);
+  const refreshHandler = () => {
+    setRefresh((prev) => !prev);
+  };
 
   return (
     <div className={classes.dashboardPost}>
@@ -105,8 +122,8 @@ const DashBoardPost = ({ postData }) => {
         </div>
         <div className={classes["post__detail"]}>
           <h3>{postData.title}</h3>
-         <NavLink to={`/dashboard/chats/:${postData.author.id}`}>
-          <span>posted by {postData.author.name}</span>
+          <NavLink to={`/dashboard/chats/:${postData.author.id}`}>
+            <span>posted by {postData.author.username}</span>
           </NavLink>
         </div>
       </div>
@@ -116,16 +133,17 @@ const DashBoardPost = ({ postData }) => {
             open
           </a>
         </div>
-        {userInfo.role === "admin" && (
-          <div className={classes["post-expand-link"]}>
-            <span
-              onClick={deleteHandler}
-              className={classes["post-delete-link"]}
-            >
-              delete
-            </span>
-          </div>
-        )}
+        {userInfo.role === "admin" &&
+          userInfo.userId === postData.author.userId && (
+            <div className={classes["post-expand-link"]}>
+              <span
+                onClick={deletePostHandler}
+                className={classes["post-delete-link"]}
+              >
+                delete
+              </span>
+            </div>
+          )}
 
         <div className={classes["post-date"]}>
           <p>
@@ -153,11 +171,11 @@ const DashBoardPost = ({ postData }) => {
             <Divider>Comments</Divider>
             <div className={classes["post-comment-area"]}>
               <div className={classes["post-comments"]}>
-                <Comments data={comments} />
-                {/* <div className={classes["post-comment-obj"]}>
-
-                 
-                </div> */}
+                <Comments
+                  data={comments}
+                  postId={postData.postId}
+                  onRefresh={refreshHandler}
+                />
               </div>
               <div className={classes["post-comment-input"]}>
                 <form onSubmit={commentSubmitHandler}>

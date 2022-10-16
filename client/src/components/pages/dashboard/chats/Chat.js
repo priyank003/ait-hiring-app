@@ -18,8 +18,6 @@ import AdminUsers from "./AdminUsers";
 import { useSearchParams } from "react-router-dom";
 import { Routes, Route, useParams } from "react-router-dom";
 export default function Chat() {
-  const BASE_URL = "http://localhost:8000/api";
-
   const [currentChat, setCurrentChat] = useState({});
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
@@ -71,13 +69,15 @@ export default function Chat() {
 
   const getAllConversations = async (e) => {
     try {
-      const response = await fetch(`${BASE_URL}/conversation/${user.userId}`);
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/conversation/${user.userId}`
+      );
       const responseData = await response.json();
 
       const receiverId = responseData[0].members[1];
 
       const userDatares = await fetch(
-        `${BASE_URL}/conversation/userdata/${receiverId}`
+        `${process.env.REACT_APP_BACKEND_URL}/conversation/userdata/${receiverId}`
       );
       const userData = await userDatares.json();
 
@@ -88,7 +88,7 @@ export default function Chat() {
       });
 
       const recResponse = await fetch(
-        `${BASE_URL}/conversation/userdata/${receiverId}`
+        `${process.env.REACT_APP_BACKEND_URL}/conversation/userdata/${receiverId}`
       );
 
       const recResData = await recResponse.json();
@@ -118,15 +118,13 @@ export default function Chat() {
     });
 
     try {
-      await fetch(`${BASE_URL}/message`, {
+      await fetch(`${process.env.REACT_APP_BACKEND_URL}/message`, {
         method: "post",
         body: JSON.stringify(message),
         headers: {
           "Content-Type": "application/json",
         },
-      }).then((res) => {
-        console.log(res.json());
-      });
+      }).then((res) => {});
     } catch (err) {
       console.log(err);
     }
@@ -138,11 +136,9 @@ export default function Chat() {
 
   const getConvTwoIds = async (receiverId) => {
     const response = await fetch(
-      `${BASE_URL}/conversation//find/${user.userId}/${receiverId}`
+      `${process.env.REACT_APP_BACKEND_URL}/conversation//find/${user.userId}/${receiverId}`
     );
     const responseData = await response.json();
-
-    console.log(responseData);
 
     setCurrentChat(responseData);
   };
@@ -153,7 +149,9 @@ export default function Chat() {
 
   useEffect(() => {
     const getMessages = async (chatId) => {
-      const response = await fetch(`${BASE_URL}/message/${chatId}`);
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/message/${chatId}`
+      );
       const responseData = await response.json();
 
       setMessages(responseData);
@@ -162,7 +160,9 @@ export default function Chat() {
   }, [currentChat]);
 
   const getAdminUsers = async () => {
-    const response = await fetch(`${BASE_URL}/auth/all-users`);
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/auth/all-users`
+    );
     const responseData = await response.json();
 
     setAdminUsers(responseData);
@@ -171,12 +171,6 @@ export default function Chat() {
   useEffect(() => {
     getAdminUsers();
   }, []);
-
-  // useEffect(()=>{
-  //   scrollRef.current?.scrollIntoView({behavior:'smooth'})
-
-  // },[messages])
-  // console.log(adminUsers);
 
   return (
     <div className="chat__container">

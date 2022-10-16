@@ -8,11 +8,11 @@ import { Provider } from "react-redux";
 import store from "./store/index";
 require("dotenv").config();
 ReactDOM.render(
-  <HashRouter>
+  <BrowserRouter>
     <Provider store={store}>
       <App />
     </Provider>
-  </HashRouter>,
+  </BrowserRouter>,
   document.getElementById("root")
 );
 

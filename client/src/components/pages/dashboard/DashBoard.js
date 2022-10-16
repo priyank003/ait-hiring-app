@@ -16,6 +16,7 @@ import { styled, useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { userInfoActions } from "../../../store/userInfo-slice";
 import { AuthContext } from "../../../context/auth-context";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const drawerWidth = 340;
 
@@ -60,104 +61,56 @@ const DashBoard = () => {
       setOpen(true);
     }
   }, [width]);
-  const [user, setUser] = useState();
 
-  // useEffect(() => {
-  //   const getUser = () => {
-  //     fetch("http://localhost:8000/api/auth/login/success", {
-  //       method: "GET",
-  //       credentials: "include",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //         "Access-Control-Allow-Credentials": true,
-  //       },
-  //     })
-  //       .then((response) => {
-  //         if (response.status === 200) {
-  //           auth.login();
 
-  //           dispatch(userInfoActions.setUserInfoState());
-  //           return response.json();
-  //         }
-  //         throw new Error("authentication has been failed!");
-  //       })
-  //       .then((resObject) => {
-  //         // dispatch(userInfoActions.setUserState(resObject.user));
-  //         setUser(resObject.user);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
-  //   getUser();
-  // }, []);
+ 
 
-  // const cookieValue = document.cookie
-  //   .split("; ")
-  //   .find((row) => row.startsWith("authToken="))
-  //   ?.split("=")[1];
-  // dispatch(
-  //   userInfoActions.setUserInfoState({
-  //     cookie: cookieValue,
-  //   })
-  // );
-
-  // const dataToken = cookieValue.split(".")[1];
-  // const data = atob(dataToken);
-
-  // const userdata = JSON.parse(data);
-
-  // let dataObj = {
-  //   id: userdata.id,
-  //   name: userdata.name,
-  //   email: userdata.email,
-  //   cookie: cookieValue,
-  //   role: userdata.role,
-  // };
-
-  // dispatch(userInfoActions.setUserInfoState(dataObj));
+  const userInfo = useSelector((state) => state.userInfo);
 
   return (
     <div className={classes.dashboard}>
-      <div className={classes["dashboard-container"]}>
-        <Drawer
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
+      {userInfo.userId ? (
+        <div className={classes["dashboard-container"]}>
+          <Drawer
+            sx={{
               width: drawerWidth,
-              boxSizing: "border-box",
-            },
-          }}
-          variant={width > 1200 ? "persistent" : ""}
-          anchor="left"
-          open={open}
-          onClose={handleDrawerClose}
-        >
-          <DashBoardNav
-            onDrawerOpen={handleDrawerOpen}
-            onDrawerClose={handleDrawerClose}
+              flexShrink: 0,
+              "& .MuiDrawer-paper": {
+                width: drawerWidth,
+                boxSizing: "border-box",
+              },
+            }}
+            variant={width > 1200 ? "persistent" : ""}
+            anchor="left"
             open={open}
-          />
-        </Drawer>
-        {/* <Main open={open}> */}
-        <div className={classes["dashboard-main"]}>
-          <DashboardHeader
-            onDrawerOpen={handleDrawerOpen}
-            onDrawerClose={handleDrawerClose}
-            open={open}
-          />
-          <div className={classes["dashboard-main-container"]}>
-            <div className={classes["main-left"]}>
-              <DashBoardPages />
-            </div>
-            <div className={classes["main-right"]}>
-              <DashBoardCalendar />
+            onClose={handleDrawerClose}
+          >
+            <DashBoardNav
+              onDrawerOpen={handleDrawerOpen}
+              onDrawerClose={handleDrawerClose}
+              open={open}
+            />
+          </Drawer>
+          {/* <Main open={open}> */}
+          <div className={classes["dashboard-main"]}>
+            <DashboardHeader
+              onDrawerOpen={handleDrawerOpen}
+              onDrawerClose={handleDrawerClose}
+              open={open}
+            />
+            <div className={classes["dashboard-main-container"]}>
+              <div className={classes["main-left"]}>
+                <DashBoardPages />
+              </div>
+              <div className={classes["main-right"]}>
+                <DashBoardCalendar />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <CircularProgress />
+      )}
     </div>
   );
 };

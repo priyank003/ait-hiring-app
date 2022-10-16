@@ -10,43 +10,38 @@ const session = require("express-session");
 const passportSetup = require("./passport");
 const flash = require("connect-flash");
 
-// const corsOptions = {
-//   origin: "http://localhost:3000",
-
-//   // credentials: true, //access-control-allow-credentials:true
-//   // optionSuccessStatus: 200,
-// };
-// cors({
-//   origin: "http://localhost:3000",
-// })
 app.use(
   cors({
-    origin: ["https://ait-hiring-app.vercel.app/", "http://localhost:3000"],
+    origin: [
+      "https://ait-hiring-app.vercel.app/",
+      "http://localhost:3000",
+      "https://hiring-app-navy.vercel.app/",
+    ],
     credentials: true,
   })
 );
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type,Accept,Authorization"
-//   );
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "GET",
-//     "POST",
-//     "PATCH",
-//     "DELETE"
-//   );
-//   next();
-// });
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type,Accept,Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET",
+    "POST",
+    "PATCH",
+    "DELETE"
+  );
+  next();
+});
 //security related middlewares
 // app.use(helmet());
 app.use(express.urlencoded());
 app.use(express.json());
-app.use(flash());
+app.use(express.static(path.join(__dirname, "..", "public")));
 
-app.use(express.static(path.join(__dirname, "..", "build")));
+app.use(flash());
 
 app.use(session({ secret: "notagoodsecret" }));
 
@@ -57,6 +52,14 @@ app.use(passport.session());
 //how to  store and unstore user data in this session
 // passport.serializeUser(User.serializeUser());
 // passport.deserializeUser(User.deserializeUser());
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+
+  next();
+});
 
 //routes
 const userRouter = require("./routes/users");
@@ -69,19 +72,8 @@ app.use("/api/posts", postsRouter);
 app.use("/api/conversation", conversationRouter);
 app.use("/api/message", messageRouter);
 
-app.get("/fakeUser", async (req, res) => {
-  const user = new User({
-    email: "priyankcrjr7@gmail.com",
-    username: "priyank003",
-    branch: "computer",
-    rollNo: "7344",
-  });
-  const newUser = await User.register(user, "mypassword");
-  res.send(newUser);
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
-
-// app.get("/", (req, res) => {
-//   res.send("Hello world");
-// });
 
 module.exports = app;

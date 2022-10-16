@@ -1,0 +1,32 @@
+{
+  "name": "ait-hiring-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "npm install ./server",
+    "install-client": "npm install ./client",
+    "install": "npm run install-server && npm run install-client",
+    "server": " npm run watch --prefix server",
+    "client": "npm start --prefix client",
+    "watch": "npm run client & npm run server ",
+    "deploy": "npm run build --prefix client && npm start --prefix server",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "npm test --prefix server && npm test --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priyank003/ait-hiring-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/priyank003/ait-hiring-app/issues"
+  },
+  "homepage": "https://github.com/priyank003/ait-hiring-app#readme",
+  "dependencies": {
+    "concurrently": "^7.4.0",
+    "server": "file:server"
+  }
+}

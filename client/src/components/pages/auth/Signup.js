@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import classes from "./Signup.module.css";
 
 import useInput from "../../../hooks/use-input";
-import axios from "axios";
-import { useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { userInfoActions } from "../../../store/userInfo-slice";
+import {  useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/auth-context";
 const Signup = (props) => {
-  const history = useHistory();
-  const dispatch = useDispatch();
+  const auth = useContext(AuthContext);
 
   const {
     value: enteredName,
@@ -61,6 +59,14 @@ const Signup = (props) => {
     inputBlurHandler: branchBlurHandler, // eslint-disable-next-line
     reset: resetbranchInput,
   } = useInput((value) => value.trim() !== "");
+  const {
+    value: enteredRole, // eslint-disable-next-line
+    isValid: enteredRoleIsValid, // eslint-disable-next-line
+    hasEror: roleInputHasEror, // eslint-disable-next-line
+    valueChangeHandler: roleChangeHandler,
+    inputBlurHandler: roleBlurHandler, // eslint-disable-next-line
+    reset: resetRoleInput,
+  } = useInput((value) => value.trim() !== "");
 
   const {
     value: enteredPassword, // eslint-disable-next-line
@@ -91,10 +97,9 @@ const Signup = (props) => {
     enteredPasswordIsValid &&
     enteredConfirmPasswordIsValid
   ) {
-    // eslint-disable-next-line
+  
     formIsValid = true;
   }
-  const baseURL = "http://localhost:8000/api/auth/register/";
 
   const formSubmissionHandler = async (e) => {
     e.preventDefault();
@@ -107,28 +112,26 @@ const Signup = (props) => {
       branch: enteredbranch,
       email: enteredEmail,
       regId: enteredId,
+      role: enteredRole,
     };
-    const response = await fetch(baseURL, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/register`, {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    console.log(response)
+   
     if (response.ok === true) {
       const resData = await response.json();
-      console.log(resData.user_data)
-      dispatch(userInfoActions.setUserInfoState(resData.user_data));
-      history.push("/dashboard");
+    
+      auth.login(resData.user_data.userId, resData.user_data.token);
+    
     }
 
-    // resetNameInput();
   };
-  //post request axios
 
-  // eslint-disable-next-line
-  const [post, setPost] = useState(null);
+
 
   // useEffect(() => {
   //   axios.get(`${baseURL}/1`).then((response) => {
@@ -136,23 +139,23 @@ const Signup = (props) => {
   //   });
   // }, []);
 
-  function updatePost() {
-    axios
-      .post(`${baseURL}`, {
-        username: `${enteredName}`,
-        lastname: `${enteredlastName}`,
-        firstname: `${enteredName}`,
-        password: `${enteredPassword}`,
-        year: `${enteredYear}`,
-        branch: `${enteredbranch}`,
-        email: `${enteredEmail}`,
-        registration: `${enteredId}`,
-      })
-      .then((response) => {
-        console.log(response);
-        setPost(response.data);
-      });
-  }
+  // function updatePost() {
+  //   axios
+  //     .post(`${baseURL}`, {
+  //       username: `${enteredName}`,
+  //       lastname: `${enteredlastName}`,
+  //       firstname: `${enteredName}`,
+  //       password: `${enteredPassword}`,
+  //       year: `${enteredYear}`,
+  //       branch: `${enteredbranch}`,
+  //       email: `${enteredEmail}`,
+  //       registration: `${enteredId}`,
+  //     })
+  //     .then((response) => {
+       
+  //       setPost(response.data);
+  //     });
+  // }
 
   return (
     <div className={classes.signUp}>
@@ -274,6 +277,26 @@ const Signup = (props) => {
                   </label>
                   {branchInputHasEror && (
                     <p className={classes["eror-text"]}>select branch</p>
+                  )}
+                </div>
+                <div className={`${classes["input_field"]}`}>
+                  <label htmlFor="">
+                    <span>Role</span>
+
+                    <select
+                      name="role"
+                      id="role-select"
+                      onChange={roleChangeHandler}
+                      value={enteredRole}
+                      onBlur={roleBlurHandler}
+                    >
+                      <option value="">Select</option>
+                      <option value="student">Student</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </label>
+                  {roleInputHasEror && (
+                    <p className={classes["eror-text"]}>select role</p>
                   )}
                 </div>
               </div>

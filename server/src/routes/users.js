@@ -3,7 +3,10 @@ const router = express.Router();
 const User = require("../models/user/user.mongo");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
-const { httpGetAdminUsers } = require("../controller/users.controller");
+const {
+  httpGetAdminUsers,
+  httpGetUserProfile,
+} = require("../controller/users.controller");
 const catchAsync = require("../utils/catchAsync");
 const { v4: uuidv4 } = require("uuid");
 router.post(
@@ -19,9 +22,8 @@ router.post(
         branch,
         regId,
         password,
+        role,
       } = req.body;
-
-      const role = "student";
 
       const user = new User({
         userId: uuidv4(),
@@ -36,10 +38,29 @@ router.post(
       });
       const registeredUser = await User.register(user, password);
 
+      req.login(registeredUser, (err) => {
+        if (err) return next(err);
+        req.flash("success", "Welcome to ait placement cell");
+       
+      });
+
+      const userId = registeredUser.userId;
+
+      const token = jwt.sign(
+        {
+          userId,
+          email,
+          role,
+        },
+        process.env.JWTSecretKey,
+        { expiresIn: "1h" }
+      );
+
       res.status(200).json({
         status: "ok",
         message: "successfully registerd",
         user_data: {
+          userId,
           username,
           email,
           lastname,
@@ -48,9 +69,10 @@ router.post(
           branch,
           regId,
           role,
+          token,
         },
       });
-      console.log(registeredUser);
+     
     } catch (err) {
       console.log(`Could not register user ${err}`);
 
@@ -62,23 +84,71 @@ router.post(
   })
 );
 
-router.post("/login", passport.authenticate("local"), (req, res) => {
-  console.log("logged in");
-});
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    failureRedirect: "/login",
+    failureFlash: true,
+  }),
+  (req, res) => {
+    req.flash("success", "welcome back");
+    const redirectUrl = req.session.returnTo || "/dashboard";
 
-// router.get("/login/success", (req, res) => {
-//   if (req.user) {
-//     res.status(200).json({
-//       success: true,
-//       message: "successfull",
-//       user: req.user,
-//       //   cookies: req.cookies
-//     });
-//   }
-// });
+    delete req.session.returnTo;
+
+    const {
+      email,
+      username,
+      lastname,
+      firstname,
+      year,
+      branch,
+      regId,
+      role,
+      userId,
+    } = req.user;
+
+    req.flash("welcome to placement cell");
+
+    let token;
+
+    try {
+      token = jwt.sign(
+        {
+          userId,
+          email,
+        },
+        process.env.JWTSecretKey,
+        { expiresIn: "1h" }
+      );
+    } catch (err) {
+      console.log(`Could not generate token ${err}`);
+    }
+  
+
+    res.status(200).json({
+      status: "ok",
+      user_details: {
+        userId,
+        email,
+        username,
+        lastname,
+        firstname,
+        year,
+        branch,
+        regId,
+        role,
+        token,
+      },
+    });
+  }
+);
+
+router.get("/user/profile/:userid", httpGetUserProfile);
 
 router.get("/logout", function (req, res) {
   req.logout();
+  req.flash("success", "GoodBye!");
   res.redirect("/");
 });
 

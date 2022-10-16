@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialUserInfo = {
+  userId: "",
   email: "",
   username: "",
   lastname: "",
@@ -24,6 +25,7 @@ const userInfoSlice = createSlice({
       state.branch = action.payload.branch;
       state.regId = action.payload.regId;
       state.role = action.payload.role;
+      state.userId = action.payload.userId;
     },
   },
 });

@@ -4,6 +4,7 @@ const postComment = async (postId, commentObj) => {
   try {
     const post = await Post.findOne({ postId: postId }).exec();
     post.comment({
+      commentId: commentObj.commentId,
       author: commentObj.author,
       text: commentObj.description,
       activityDateTime: commentObj.activityDateTime,
@@ -19,16 +20,18 @@ const postComment = async (postId, commentObj) => {
   }
 };
 
-const deleteComment = async (commentId) => {
+const deleteComment = async (postId, commentId) => {
   try {
-    return await Post.deleteOne({ commentId: commentId });
+    return await Post.findOneAndUpdate(
+      { postId: postId },
+      { $pull: { comments: { commentId: commentId } } }
+    );
   } catch (err) {
     console.log(`Could not delete post ${err}`);
   }
 };
 
 const getComments = async (postId) => {
-  
   try {
     const post = await Post.findOne({ postId: postId }).populate({
       path: "comments",

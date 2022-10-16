@@ -1,7 +1,7 @@
 import React, { Component, useContext } from "react";
 import classes from "./Login.module.css";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { useRef } from "react";
@@ -9,12 +9,11 @@ import useInput from "../../../hooks/use-input";
 import Config from "../../../azure/auth/Config";
 import { PublicClientApplication } from "@azure/msal-browser";
 import { AuthContext } from "../../../context/auth-context";
-
+import { userInfoActions } from "../../../store/userInfo-slice";
 const Login = () => {
+  const auth = useContext(AuthContext);
   let formIsValid = false;
-  const dispatch = useDispatch();
-  const baseURL = "http://localhost:8000/api/auth/login";
-
+ 
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
@@ -57,24 +56,24 @@ const Login = () => {
       password: enteredPassword,
     };
 
-    console.log(userData);
-
-    const response = await fetch("http://localhost:8000/api/auth/login", {
+    const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/auth/login", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {
         "Content-Type": "application/json",
       },
     });
+    if (response.ok === true) {
+      const resData = await response.json();
 
-    console.log(response);
+      auth.login(resData.user_details.userId, resData.user_details.token);
+    
+    }
   };
 
   if (enteredEmailIsValid && enteredPasswordIsValid && enteredRoleIsValid) {
     formIsValid = true;
   }
-
-  const auth = useContext(AuthContext);
 
   return (
     <div className={classes.login}>

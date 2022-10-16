@@ -7,13 +7,19 @@ import Signup from "./components/pages/auth/Signup";
 import Login from "./components/pages/auth/Login";
 import DashBoard from "./components/pages/dashboard/DashBoard";
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import Footer from "./components/pages/home/Footer";
 import Highlights from "./components/pages/home/Highlights";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthContext } from "./context/auth-context";
+import { useDispatch, useSelector } from "react-redux";
+import { userInfoActions } from "./store/userInfo-slice";
 
 function App() {
+ 
+  const dispatch = useDispatch();
+  const auth = useContext(AuthContext);
+  const history = useHistory();
   function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
     return {
@@ -46,26 +52,44 @@ function App() {
     ?.split("=")[1];
 
   const [isLogged, setLoggedIn] = useState(false);
-  const [cookie, setCookie] = useState("");
+  const [token, setToken] = useState(false);
+  const [userId, setUserId] = useState(false);
 
-  const login = useCallback(() => {
-    setLoggedIn(true);
+  const login = useCallback(async (uid, token) => {
+    setToken(token);
+    localStorage.setItem(
+      "userData",
+      JSON.stringify({ userId: uid, token: token })
+    );
+    setUserId(uid);
+
+    if (uid) {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/user/profile/${uid}`);
+      const resData = await response.json();
+      dispatch(userInfoActions.setUserInfoState(resData));
+      history.push("/dashboard");
+    }
   }, []);
+
+  //useffect always runs after the render cycle
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("userData"));
+   
+
+    if (storedData && storedData.token) {
+      login(storedData.userId, storedData.token);
+    }
+  }, [login]);
 
   const logout = useCallback(() => {
-    setLoggedIn(false);
+    setToken(null);
+    setUserId(null);
+    localStorage.removeItem("userData");
   }, []);
 
-  const setCooki = () => {
-    setCookie(cookieValue);
-  };
-
-  const auth = useContext(AuthContext);
 
   return (
-    <AuthContext.Provider
-      value={{ isLoggedIn: isLogged, cookie: cookie, login, logout, setCooki }}
-    >
+    <AuthContext.Provider value={{ isLoggedIn: !!token,userId, token, login, logout }}>
       <div>
         <div className="App">
           <Switch>
@@ -78,11 +102,11 @@ function App() {
               <Header />
               <Login />
             </Route>
-            {/* {!auth.isLoggedIn && ( */}
-            <Route path="/dashboard">
-              <DashBoard />
-            </Route>
-            {/* // )} */}
+            {token && (
+              <Route path="/dashboard">
+                <DashBoard />
+              </Route>
+            )}
 
             <Route path="/">
               <Header />

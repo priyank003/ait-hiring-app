@@ -1,20 +1,27 @@
-const { createPost, getPosts,deletePost } = require("../models/posts/post.model");
+const {
+  createPost,
+  getPosts,
+  deletePost,
+} = require("../models/posts/post.model");
 const { postComment } = require("../models/comments/comment.model");
 const { v4: uuidv4 } = require("uuid");
 const User = require("../models/user/user.mongo");
 const jwt = require("jsonwebtoken");
+const HttpError = require("../models/http-error");
 const httpCreatePost = async (req, res) => {
-  const token = req.headers.authorization.split(" ")[1];
+  const { title, author, description } = req.body;
+  // const token = req.headers.authorization.split(" ")[1];
 
-  const user = jwt.verify(token, process.env.JWTSecretKey);
+  // const user = jwt.verify(token, process.env.JWTSecretKey);
 
-  const postedByUser = await User.findOne({ outlookId: user.id }).exec();
+  const postedByUser = await User.findOne({ userId: author }).exec();
 
   const postObj = {
     author: postedByUser._id,
+    title,
+    description,
     activityDateTime: new Date(),
-    id: uuidv4(),
-    ...req.body,
+    postId: uuidv4(),
   };
   await createPost(postObj);
 
@@ -32,8 +39,14 @@ const httpGetPost = async (req, res) => {
   });
 };
 
-const httpDeletePost = async (req, res) => {
+const httpDeletePost = async (req, res, next) => {
   const postId = req.params.postid;
+  const authorId = req.params.authorid;
+
+  if (req.userData.userId !== authorId) {
+    const error = new HttpError("You are not allowed to edit this post", 401);
+    return next(error);
+  }
 
   await deletePost(postId);
 

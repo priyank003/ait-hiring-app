@@ -9,6 +9,22 @@ const httpGetAdminUsers = async (req, res) => {
   }
 };
 
+const httpGetUserProfile = async (req, res) => {
+  const userId = req.params.userid;
+
+  try {
+    const user = await User.findOne({ userId });
+    res.status(200).json(user);
+  } catch (err) {
+    console.log(`Could not get user details ${err}`);
+    res.status(404).json({
+      status: "not ok",
+      message: "user not found",
+    });
+  }
+};
+
 module.exports = {
   httpGetAdminUsers,
+  httpGetUserProfile,
 };

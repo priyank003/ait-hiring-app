@@ -18,7 +18,7 @@
     "chart.js": "^3.5.1",
     "cloudinary-react": "^1.7.0",
     "dayjs": "^1.11.5",
-    "dotenv": "^16.0.2",
+    "dotenv": "^16.0.3",
     "env-cmd": "^10.1.0",
     "firebase": "^9.1.0",
     "firebase-tools": "^9.18.0",
@@ -42,7 +42,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "set BUILD_PATH=../server/public && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

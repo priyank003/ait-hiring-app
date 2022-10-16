@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./DashBoardNav.module.css";
 import AIT from "../../../assets/logos/AIT black logo.png";
 import jobImg from "../../../assets/images/jobprofiles.svg";
@@ -14,12 +14,14 @@ import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import useWindowDimensions from "../../../hooks/use-windowSize";
+import { AuthContext } from "../../../context/auth-context";
 const DashBoardNav = ({ onDrawerOpen, onDrawerClose, open }) => {
+  const auth = useContext(AuthContext);
   const { width } = useWindowDimensions();
   const dispatch = useDispatch();
   //logout redux
   const logoutHandler = () => {
-    dispatch(authActions.logout());
+    auth.logout();
   };
 
   //show sidenav redux
@@ -69,10 +71,6 @@ const DashBoardNav = ({ onDrawerOpen, onDrawerClose, open }) => {
               <a href="/uqhue">Account</a>
             </div>
           </NavLink>
-
-        
-
-        
 
           <NavLink
             to="/dashboard/chats"

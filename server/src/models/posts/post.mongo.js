@@ -13,6 +13,7 @@ const postSchema = new Schema({
   },
   comments: [
     {
+      commentId: String,
       author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -24,8 +25,7 @@ const postSchema = new Schema({
   activityDateTime: String,
 });
 
-postSchema.methods.comment= function (c) {
-
+postSchema.methods.comment = function (c) {
   this.comments.push(c);
   return this.save();
 };

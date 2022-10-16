@@ -4,17 +4,18 @@ import DashBoardPost from "./DashBoardPost";
 import filter from "../../../assets/logos/filter_list_black_24dp.svg";
 import { useCallback, useState, useEffect } from "react";
 const DashBoardPosts = () => {
+  const [refresh, setRefresh] = useState(false);
   const [post, setPost] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const BASE_URL = "http://localhost:8000/api";
+  
 
   const fetchPostsHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${BASE_URL}/posts/get`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/posts/get`);
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
@@ -29,9 +30,8 @@ const DashBoardPosts = () => {
 
   useEffect(() => {
     fetchPostsHandler();
-  }, [fetchPostsHandler]);
+  }, []);
 
-  console.log(post);
 
   return (
     <div className={classes["dashboard-posts"]}>
@@ -45,7 +45,7 @@ const DashBoardPosts = () => {
 
       <div className={classes["dashboard-notices"]}>
         {post.map((data) => {
-          return <DashBoardPost postData={data} />;
+          return <DashBoardPost postData={data} key={data.postId} />;
         })}
       </div>
     </div>
