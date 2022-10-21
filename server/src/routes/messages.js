@@ -3,10 +3,13 @@ const {
   httpGetMessageById,
   httpPostMessage,
 } = require("../controller/message.controller");
+const checkAuth = require("../middleware/check-auth");
+
+// router.use(checkAuth);
 
 //add
 
-router.post("/", httpPostMessage);
+router.post("/post", httpPostMessage);
 
 //get
 

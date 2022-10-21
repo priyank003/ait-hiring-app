@@ -26,7 +26,7 @@ const Header = (props) => {
         <div className={classes["header-nav"]}>
           <div className={classes["nav-auth"]}>
             <Link to="/login">
-              <button className={classes["auth-signup"]}>Sign-in</button>
+              <button className={classes["auth-signin"]}>Sign-in</button>
             </Link>
             <Link to="/signup">
               <button className={classes["auth-signup"]}>Register</button>

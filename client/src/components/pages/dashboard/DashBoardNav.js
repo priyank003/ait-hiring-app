@@ -57,9 +57,7 @@ const DashBoardNav = ({ onDrawerOpen, onDrawerClose, open }) => {
             activeClassName={classes["active-link"]}
             onClick={hideSideNavHandler}
           >
-            <div className={classes["nav-link"]}>
-              <a href="/355555555">DashBoard</a>
-            </div>
+            <div className={classes["nav-link"]}>DashBoard</div>
           </NavLink>
 
           <NavLink
@@ -67,9 +65,7 @@ const DashBoardNav = ({ onDrawerOpen, onDrawerClose, open }) => {
             activeClassName={classes["active-link"]}
             onClick={hideSideNavHandler}
           >
-            <div className={classes["nav-link"]}>
-              <a href="/uqhue">Account</a>
-            </div>
+            <div className={classes["nav-link"]}>Account</div>
           </NavLink>
 
           <NavLink
@@ -77,9 +73,7 @@ const DashBoardNav = ({ onDrawerOpen, onDrawerClose, open }) => {
             activeClassName={classes["active-link"]}
             onClick={hideSideNavHandler}
           >
-            <div className={classes["nav-link"]}>
-              <a href="/ewwr">Chats</a>
-            </div>
+            <div className={classes["nav-link"]}>Chats</div>
           </NavLink>
         </div>
       </div>

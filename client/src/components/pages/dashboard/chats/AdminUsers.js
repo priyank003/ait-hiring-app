@@ -9,18 +9,20 @@ import Typography from "@mui/material/Typography";
 
 export default function AdminUsers({ user, onClick }) {
   const clickHandler = () => {
-    onClick(user.id);
+    onClick(user.userId);
   };
   return (
     <ListItem
-      alignItems="flex-start"
       onClick={clickHandler}
-      style={{ cursor: "pointer" }}
+      style={{
+        cursor: "pointer",
+        borderBottom: "1px solid rgb(207, 199, 199)",
+      }}
     >
       <ListItemAvatar>
-        <Avatar alt={user.name}>{user.email[0].toUpperCase()}</Avatar>
+        <Avatar alt={user.username}>{user.username[0]}</Avatar>
       </ListItemAvatar>
-      <ListItemText primary={user.name} />
+      <ListItemText primary={`${user.username} ${user.lastname}`} />
     </ListItem>
   );
 }

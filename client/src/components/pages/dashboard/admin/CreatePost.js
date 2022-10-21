@@ -77,16 +77,18 @@ const CreatePost = ({ hideCreatePost }) => {
   };
   const userCookie = useSelector((state) => state.userInfo.cookie);
 
-  
   async function addPostHandler(notice) {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/posts/create`, {
-      method: "POST",
-      body: JSON.stringify(notice),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + auth.token,
-      },
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/posts/create`,
+      {
+        method: "POST",
+        body: JSON.stringify(notice),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.token,
+        },
+      }
+    );
     const noticeData = await response.json();
     if (noticeData.status === "ok") {
       hideCreatePost();
@@ -100,12 +102,11 @@ const CreatePost = ({ hideCreatePost }) => {
   const allInputs = { imgUrl: "" };
   const [imageAsFile, setImageAsFile] = useState("");
   const [imageAsUrl, setImageAsUrl] = useState(allInputs);
-  console.log(imageAsFile);
+
   const handleImageAsFile = (e) => {
     const image = e.target.files[0];
     setImageAsFile((imageFile) => image);
   };
-
 
   let formIsValid = false;
 

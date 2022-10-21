@@ -50,7 +50,8 @@
   transform: scale(1.2);
 }
 
-.auth-signup {
+.auth-signup,
+.auth-signin {
   background: var(--color-primary);
   color: white;
   width: 90px;
@@ -61,7 +62,8 @@
   font-size: 1rem;
   cursor: pointer;
 }
-.auth-signup:hover {
+.auth-signup:hover,
+.auth-signin:hover {
   transform: scale(1.2);
 }
 
@@ -91,5 +93,13 @@
   }
   .auth-signup {
     display: none;
+    font-size: 0.8rem;
+ 
+    /* width: fit-content;
+    margin: 0; */
+  }
+  .auth-signin{
+  
+    font-size: 0.8rem;
   }
 }

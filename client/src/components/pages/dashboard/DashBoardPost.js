@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import classes from "./DashBoardPost.module.css";
 import postIcon from "../../../assets/logos/noticeIcon.svg";
 import close from "../../../assets/logos/close_black_24dp.svg";
@@ -9,7 +9,38 @@ import Comments from "./Comments";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../context/auth-context";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import FolderIcon from "@mui/icons-material/Folder";
+import DeleteIcon from "@mui/icons-material/Delete";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import FileOpenIcon from "@mui/icons-material/FileOpen";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import EditIcon from "@mui/icons-material/Edit";
+import PostModal from "./PostModal";
+
+const options = ["delete", "update"];
+
+const ITEM_HEIGHT = 48;
+
 const DashBoardPost = ({ postData }) => {
+  const listRef = useRef();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const auth = useContext(AuthContext);
 
   const userInfo = useSelector((state) => state.userInfo);
@@ -51,59 +82,40 @@ const DashBoardPost = ({ postData }) => {
   }, [postData]);
 
   const deletePostHandler = async () => {
-    await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/posts/delete/${postData.postId}/${postData.author.userId}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${auth.token}`,
-        },
-      }
-    ).then((res) => {});
-  };
-  const {
-    value: enteredEditor,
-    isValid: enteredEditorIsValid,
-    hasEror: editorInputHasEror,
-    valueChangeHandler: editorChangeHandler,
-    inputBlurHandler: editorBlurHandler,
-    reset: resetEditorInput,
-  } = useInput((value) => value.trim() !== "");
-
-  const commentSubmitHandler = async (e) => {
-    const commentObj = {
-      description: enteredEditor,
-      author: userInfo.userId,
-    };
-    e.preventDefault();
-
-    await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/posts/comment/${postData.postId}`,
-      {
-        method: "post",
-        body: JSON.stringify(commentObj),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + auth.token,
-        },
-      }
-    ).then((res) => {
-      setRefresh((prev) => !prev);
-    });
+    try {
+      await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/posts/delete/${postData.postId}/${postData.author.userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        }
+      ).then((res) => {
+        setAnchorEl(null);
+      });
+    } catch (err) {
+      console.log(`Could not delete post ${err}`);
+    }
   };
 
   const getComments = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/posts/allcomments/${postData.postId}`,
-      {
-        headers: {
-          Authorization: "Bearer " + auth.token,
-        },
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/posts/allcomments/${postData.postId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + auth.token,
+          },
+        }
+      );
+      if (response.ok) {
+        const resData = await response.json();
+        setComments(resData.results);
       }
-    );
-    const resData = await response.json();
-
-    setComments(resData.results);
+    } catch (err) {
+      console.log(`Could not get comments`);
+    }
   };
 
   useEffect(() => {
@@ -114,84 +126,65 @@ const DashBoardPost = ({ postData }) => {
     setRefresh((prev) => !prev);
   };
 
+  const [dense, setDense] = React.useState(false);
+  const [secondary, setSecondary] = React.useState(false);
   return (
     <div className={classes.dashboardPost}>
-      <div className={classes["post-header"]}>
-        <div className={classes["post-icon"]}>
-          <img src={postIcon} alt="" />
-        </div>
-        <div className={classes["post__detail"]}>
-          <h3>{postData.title}</h3>
-          <NavLink to={`/dashboard/chats/:${postData.author.id}`}>
-            <span>posted by {postData.author.username}</span>
-          </NavLink>
-        </div>
-      </div>
-      <div className={classes["post-end"]}>
-        <div className={classes["post-expand-link"]}>
-          <a href="/dashboard" onClick={openHandler}>
-            open
-          </a>
-        </div>
-        {userInfo.role === "admin" &&
-          userInfo.userId === postData.author.userId && (
-            <div className={classes["post-expand-link"]}>
-              <span
-                onClick={deletePostHandler}
-                className={classes["post-delete-link"]}
-              >
-                delete
-              </span>
-            </div>
-          )}
-
-        <div className={classes["post-date"]}>
-          <p>
-            {postTime.day} {postTime.month}
-          </p>{" "}
-          <span>
-            {postTime.hour}:{postTime.min} {postTime.amPm}
-          </span>
-        </div>
-      </div>
-
-      {expand && (
-        <div className={classes["post-expand"]}>
-          <div className={classes["post-content"]}>
-            <div className={classes["post-header"]}>
-              <h2>{postData.title}</h2>
-
-              <button>
-                <img src={close} alt="close" onClick={hideModal} />
-              </button>
-            </div>
-            <div className={classes["post-content-area"]}>
-              {postData.description}
-            </div>
-            <Divider>Comments</Divider>
-            <div className={classes["post-comment-area"]}>
-              <div className={classes["post-comments"]}>
-                <Comments
-                  data={comments}
-                  postId={postData.postId}
-                  onRefresh={refreshHandler}
-                />
-              </div>
-              <div className={classes["post-comment-input"]}>
-                <form onSubmit={commentSubmitHandler}>
-                  <textarea
-                    value={enteredEditor}
-                    onChange={editorChangeHandler}
-                    placeholder="comment"
-                  />
-                  <Button type="submit" variant="contained">
-                    submit
-                  </Button>
-                </form>
-              </div>
-            </div>
+      <ListItem sx={{ cursor: "pointer" }} onClick={openHandler}>
+        <ListItemAvatar>
+          <div className={classes["post-icon"]}>
+            <img src={postIcon} alt="" />
           </div>
+        </ListItemAvatar>
+        <ListItemText
+          primary={postData.title}
+          secondary={`posted by ${postData.author.username}`}
+        />
+      </ListItem>
+
+      {userInfo.role === "admin" && userInfo.userId === postData.author.userId && (
+        <div className={classes["post-end"]}>
+          <IconButton
+            aria-label="more"
+            id="long-button"
+            aria-controls={open ? "long-menu" : undefined}
+            aria-expanded={open ? "true" : undefined}
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            <MoreVertIcon />
+          </IconButton>
+          <Menu
+            id="long-menu"
+            MenuListProps={{
+              "aria-labelledby": "long-button",
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            PaperProps={{
+              style: {
+                maxHeight: ITEM_HEIGHT * 4.5,
+              },
+            }}
+          >
+            <MenuItem onClick={deletePostHandler}>
+              <ListItemIcon>
+                <DeleteIcon fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="inherit">Delete</Typography>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <ListItemIcon>
+                <EditIcon fontSize="small" />
+              </ListItemIcon>
+              <Typography variant="inherit">Edit</Typography>
+            </MenuItem>
+          </Menu>
         </div>
+      )}
+      {expand && (
+        <PostModal openState={expand} onClose={hideModal} postData={postData} />
       )}
     </div>
   );

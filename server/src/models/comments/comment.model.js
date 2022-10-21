@@ -33,12 +33,14 @@ const deleteComment = async (postId, commentId) => {
 
 const getComments = async (postId) => {
   try {
-    const post = await Post.findOne({ postId: postId }).populate({
-      path: "comments",
-      populate: {
-        path: "author",
-      },
-    });
+    const post = await Post.findOne({ postId: postId })
+      .populate({
+        path: "comments",
+        populate: {
+          path: "author",
+        },
+      })
+      .exec();
     return post;
   } catch (err) {
     console.log(`Could not get comments ${err}`);

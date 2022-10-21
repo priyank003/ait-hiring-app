@@ -131,7 +131,7 @@
 }
 @media (max-width: 1000px) {
   .main-right {
-    width: 35%;
+    display: none;
   }
 }
 
@@ -147,9 +147,7 @@
     align-items: center;
   }
 
-  .main-right {
-    display: none;
-  }
+ 
   .main-left {
     width: 100%;
     margin: 0;

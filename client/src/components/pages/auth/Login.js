@@ -13,7 +13,7 @@ import { userInfoActions } from "../../../store/userInfo-slice";
 const Login = () => {
   const auth = useContext(AuthContext);
   let formIsValid = false;
- 
+
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
@@ -55,19 +55,25 @@ const Login = () => {
       email: enteredEmail,
       password: enteredPassword,
     };
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_BACKEND_URL + "/auth/login",
+        {
+          method: "POST",
+          body: JSON.stringify(userData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/auth/login", {
-      method: "POST",
-      body: JSON.stringify(userData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok === true) {
-      const resData = await response.json();
+      if (response.ok === true) {
+        const resData = await response.json();
 
-      auth.login(resData.user_details.userId, resData.user_details.token);
-    
+        auth.login(resData.user_details.userId, resData.user_details.token);
+      }
+    } catch (err) {
+      console.log(`Could not log in user ${err}`);
     }
   };
 

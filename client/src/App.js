@@ -16,7 +16,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { userInfoActions } from "./store/userInfo-slice";
 
 function App() {
- 
   const dispatch = useDispatch();
   const auth = useContext(AuthContext);
   const history = useHistory();
@@ -64,7 +63,9 @@ function App() {
     setUserId(uid);
 
     if (uid) {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/user/profile/${uid}`);
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/auth/user/profile/${uid}`
+      );
       const resData = await response.json();
       dispatch(userInfoActions.setUserInfoState(resData));
       history.push("/dashboard");
@@ -74,7 +75,6 @@ function App() {
   //useffect always runs after the render cycle
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("userData"));
-   
 
     if (storedData && storedData.token) {
       login(storedData.userId, storedData.token);
@@ -88,8 +88,11 @@ function App() {
   }, []);
 
 
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn: !!token,userId, token, login, logout }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn: !!token, userId, token, login, logout }}
+    >
       <div>
         <div className="App">
           <Switch>

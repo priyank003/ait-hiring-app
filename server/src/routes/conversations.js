@@ -1,12 +1,14 @@
 const router = require("express").Router();
 const Conversation = require("../models/conversation/conversation.mongo");
-
+const checkAuth = require("../middleware/check-auth");
 const {
   httpGetConversation,
   httpPostConversation,
   httpGetConvTwoUsers,
   httpGetUserData,
 } = require("../controller/conversation.controller");
+
+// router.use(checkAuth);
 
 //new conv
 

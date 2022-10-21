@@ -16,6 +16,7 @@ app.use(
       "https://ait-hiring-app.vercel.app/",
       "http://localhost:3000",
       "https://hiring-app-navy.vercel.app/",
+      "http://65.0.80.30:8000/",
     ],
     credentials: true,
   })
@@ -39,7 +40,7 @@ app.use((req, res, next) => {
 // app.use(helmet());
 app.use(express.urlencoded());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "..", "public")));
+app.use(express.static(path.join(__dirname, "..", "..", "client", "build")));
 
 app.use(flash());
 
@@ -72,8 +73,14 @@ app.use("/api/posts", postsRouter);
 app.use("/api/conversation", conversationRouter);
 app.use("/api/message", messageRouter);
 
+app.get("/api/hello", (req, res) => {
+  res.send("hello world");
+});
+
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
+  res.sendFile(
+    path.join(__dirname, "..", "..", "client", "build", "index.html")
+  );
 });
 
 module.exports = app;

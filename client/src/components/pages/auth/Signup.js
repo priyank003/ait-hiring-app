@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classes from "./Signup.module.css";
 
 import useInput from "../../../hooks/use-input";
-import {  useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/auth-context";
@@ -97,7 +97,6 @@ const Signup = (props) => {
     enteredPasswordIsValid &&
     enteredConfirmPasswordIsValid
   ) {
-  
     formIsValid = true;
   }
 
@@ -114,24 +113,27 @@ const Signup = (props) => {
       regId: enteredId,
       role: enteredRole,
     };
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/register`, {
-      method: "POST",
-      body: JSON.stringify(userData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-   
-    if (response.ok === true) {
-      const resData = await response.json();
-    
-      auth.login(resData.user_data.userId, resData.user_data.token);
-    
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/auth/register`,
+        {
+          method: "POST",
+          body: JSON.stringify(userData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok === true) {
+        const resData = await response.json();
+
+        auth.login(resData.user_data.userId, resData.user_data.token);
+      }
+    } catch (err) {
+      console.log(`Could not sign up user ${err}`);
     }
-
   };
-
-
 
   // useEffect(() => {
   //   axios.get(`${baseURL}/1`).then((response) => {
@@ -152,7 +154,7 @@ const Signup = (props) => {
   //       registration: `${enteredId}`,
   //     })
   //     .then((response) => {
-       
+
   //       setPost(response.data);
   //     });
   // }

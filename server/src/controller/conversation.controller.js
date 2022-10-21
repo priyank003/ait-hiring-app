@@ -1,5 +1,6 @@
 const Conversation = require("../models/conversation/conversation.mongo");
 const chatUsers = require("../models/chatUsers/chatUsers.mongo");
+const User = require("../models/user/user.mongo");
 
 const httpPostConversation = async (req, res) => {
   const newConversation = new Conversation({
@@ -33,7 +34,6 @@ const httpGetConvTwoUsers = async (req, res) => {
     });
 
     if (conversation == null) {
-   
       const newConvo = new Conversation({
         members: [req.params.firstUserId, req.params.secondUserId],
       });
@@ -49,7 +49,7 @@ const httpGetConvTwoUsers = async (req, res) => {
 };
 const httpGetUserData = async (req, res) => {
   try {
-    const user = await chatUsers.findOne({ userId: req.params.userId });
+    const user = await User.findOne({ userId: req.params.userId });
 
     res.status(200).json(user);
   } catch (err) {

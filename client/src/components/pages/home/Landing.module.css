@@ -191,4 +191,7 @@
   .landing-right-footer-mobile {
     display: block;
   }
+  .landing-right-footer-mobile h3{
+    text-align: center;
+  }
 }

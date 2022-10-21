@@ -7,30 +7,29 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { format, render, cancel, register } from "timeago.js";
+import { useSelector } from "react-redux";
 
 export default function ChatUser({ msg, user }) {
-  return (
-    <ListItem alignItems="flex-start">
-      <ListItemAvatar>
-        <Avatar alt="Remy Sharp" src={user.userAvatar} />
-      </ListItemAvatar>
-      <ListItemText
-        primary={user.userName}
-        secondary={
-          <React.Fragment>
-            <Typography
-              sx={{ display: "inline" }}
-              component="span"
-              variant="body2"
-              color="text.primary"
-            >
-              {msg.text}
-            </Typography>
+ 
 
-            {` -- ${format(msg.createdAt)}`}
-          </React.Fragment>
-        }
-      />
+  const userInfo = useSelector((state) => state.userInfo);
+
+  return (
+    <ListItem
+      alignItems="flex-start"
+      sx={{
+        backgroundColor: `${
+          user.userId === userInfo.userId ? "#e2ffe8" : "#e2f8ff"
+        }`,
+        margin: "10px 0",
+
+        borderRadius: "5px",
+      }}
+    >
+      <ListItemAvatar>
+        <Avatar alt="Remy Sharp">{user.username[0]}</Avatar>
+      </ListItemAvatar>
+      <ListItemText primary={user.username} secondary={msg.text} />
     </ListItem>
   );
 }

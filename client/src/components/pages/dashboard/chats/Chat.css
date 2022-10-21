@@ -5,24 +5,44 @@
 }
 .chat__online {
   background-color: white;
+  /* border-bottom: 0.5px solid rgb(109, 98, 98); */
 
-  width: 40%;
+ 
+  height: 100%;
   border-radius: 15px;
 }
+.chat__online h3,
+.chat__section h3 {
+
+  padding: 10px 20px;
+  text-align: start;
+  font-size: 1.2rem;
+  margin: 0;
+  color: var(--color-primary-font);
+}
 .chat__section {
+  height: 100%;
+
+
+  position: relative;
   /* border: 1px solid red; */
   background-color: white;
   display: flex;
   flex-direction: column;
 
-  flex-grow: 1;
+  /* flex-grow: 1; */
   margin: 0 10px;
   border-radius: 15px;
+
+  padding: 0;
+
+  /* justify-content: space-between; */
 }
 .chat__input-container {
-  /* border: 1px solid red; */
-  flex-grow: 1;
-  justify-self: flex-end;
+  width: 100%;
+
+  position: absolute;
+  bottom: 0;
   border-radius: 0 0 15px 15px;
 }
 .chat__input-container form {

@@ -100,8 +100,6 @@ const DashboardHeader = ({ onDrawerOpen, onDrawerClose, open }) => {
 
   const userInfo = useSelector((state) => state.userInfo);
 
-
-
   return (
     <div className={classes["dashboard-main-header"]}>
       <div className={classes["header-top"]}>
@@ -119,41 +117,41 @@ const DashboardHeader = ({ onDrawerOpen, onDrawerClose, open }) => {
           )}
           <span>Dashboard</span>
 
-          {width > 800 && (
+          {/* {width > 800 && (
             <div className={classes["search-input"]}>
               <input type="text" placeholder="Search Jobs" />
               <div className={classes["search-icon"]}>
                 <img src={search} alt="" />
               </div>
             </div>
-          )}
+          )} */}
         </div>
-        {userInfo.role === "admin" ? (
-          <div className={classes["admin-create-post"]}>
-            <div
-              className={classes["svg-wrap"]}
-              onMouseEnter={hoverHandler}
-              onMouseLeave={() => setShowHover(false)}
-            >
-              <img
-                src={createPost}
-                alt="createpost"
-                onClick={createPostHandler}
-              />
-            </div>
-            {showHover && (
-              <div className={classes["admin-hover-text"]}>
-                <span>Create Post</span>
-              </div>
-            )}
-          </div>
-        ) : (
-          ""
-        )}
 
         {showCreatePost && <CreatePost hideCreatePost={createPostHandler} />}
 
         <div className={classes["dashboard-user"]}>
+          {userInfo.role === "admin" ? (
+            <div className={classes["admin-create-post"]}>
+              <div
+                className={classes["svg-wrap"]}
+                onMouseEnter={hoverHandler}
+                onMouseLeave={() => setShowHover(false)}
+              >
+                <img
+                  src={createPost}
+                  alt="createpost"
+                  onClick={createPostHandler}
+                />
+              </div>
+              {showHover && (
+                <div className={classes["admin-hover-text"]}>
+                  <span>Create Post</span>
+                </div>
+              )}
+            </div>
+          ) : (
+            ""
+          )}
           <div className={classes["user-date"]}>
             {" "}
             <img src={calendarIcon} alt="" />
@@ -176,7 +174,7 @@ const DashboardHeader = ({ onDrawerOpen, onDrawerClose, open }) => {
           </div>
         </div>
       </div>
-      <div className={classes["header-bottom"]}>
+      {/* <div className={classes["header-bottom"]}>
         {width < 800 && (
           <div className={classes["search-input"]}>
             <input type="text" placeholder="Search Jobs" />
@@ -185,7 +183,7 @@ const DashboardHeader = ({ onDrawerOpen, onDrawerClose, open }) => {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
