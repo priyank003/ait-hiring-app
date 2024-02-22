@@ -13,13 +13,13 @@ RUN npm run install-server  --omit=dev
 
 
 COPY client/ client/
-RUN npm run build --prefix client
-RUN ls -la /app/client 
+# RUN npm run build --prefix client
+# RUN ls -la /app/client 
 
 COPY server/ server/
 
 USER node
 
-CMD [ "npm", "start", "--prefix", "server" ]
+CMD [ "npm", "run", "deploy" ]
 
 EXPOSE 8000
