@@ -14,7 +14,7 @@ RUN npm run install-server  --omit=dev
 
 COPY client/ client/
 RUN npm run build --prefix client
-RUN ls -la /app/client/build 
+RUN ls -la /app/client 
 
 COPY server/ server/
 
