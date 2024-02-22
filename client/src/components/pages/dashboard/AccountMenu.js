@@ -11,7 +11,6 @@ import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
-import userImg from "../../../assets/images/user/cheerful-curly-business-girl-wearing-glasses.jpg";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 

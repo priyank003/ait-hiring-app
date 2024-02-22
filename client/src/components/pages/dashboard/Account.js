@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import classes from "./Account.module.css";
-import userImg from "../../../assets/images/user/cheerful-curly-business-girl-wearing-glasses.jpg";
 import axios from "axios";
 import ImageUpload from "./ImageUpload";
 import Avatar from "@mui/material/Avatar";

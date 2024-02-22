@@ -14,7 +14,6 @@ import amazon from "../../../assets/logos/Amazon_(company)-Logo.wine.svg";
 import accenture from "../../../assets/logos/Accenture-logo.png";
 import deutsche from "../../../assets/logos/399-3994348_deutsche-bank-logo-png-transparent-png.png";
 import Footer from "./Footer";
-import univImg from "../../../assets/images/istockphoto-1045222274-612x612.jpg";
 
 const Landing = () => {
   return (
