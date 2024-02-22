@@ -18,9 +18,7 @@ COPY client/ client/
 
 COPY server/ server/
 
-USER node
-
-RUN chmod 755 /app/server 
+# USER node
 
 CMD [ "npm", "run", "deploy" ]
 
