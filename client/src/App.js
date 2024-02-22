@@ -87,7 +87,7 @@ function App() {
     localStorage.removeItem("userData");
   }, []);
 
-
+  console.log("priyank");
 
   return (
     <AuthContext.Provider

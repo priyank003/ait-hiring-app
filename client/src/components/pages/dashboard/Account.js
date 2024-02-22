@@ -52,14 +52,14 @@ const Account = () => {
           </div> */}
         </div>
 
-        <div className={classes["account-adverstisement"]}>
+        {/* <div className={classes["account-adverstisement"]}>
           <div className={classes["adv-heading"]}>
             <h1>For AIT exclusive interview experience</h1>
           </div>
           <div className={classes["adv-link"]}>
             <a href="https://anubhav.aitoss.club/"> Take me there</a>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

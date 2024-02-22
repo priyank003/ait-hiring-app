@@ -28,6 +28,7 @@
 .header-brand h1 {
   font-family: "Josefin Sans", sans-serif;
   color: var(--color-primary-font);
+  margin: 0;
 }
 
 .header-brand-img img {
@@ -94,12 +95,11 @@
   .auth-signup {
     display: none;
     font-size: 0.8rem;
- 
+
     /* width: fit-content;
     margin: 0; */
   }
-  .auth-signin{
-  
+  .auth-signin {
     font-size: 0.8rem;
   }
 }

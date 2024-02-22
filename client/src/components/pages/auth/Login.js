@@ -98,7 +98,7 @@ const Login = () => {
                 <div className={`col-12 ${classes["input_field"]}`}>
                   <input
                     type="email"
-                    placeholder="AIT email"
+                    placeholder="email"
                     onChange={emailChangeHandler}
                     value={enteredEmail}
                     className={

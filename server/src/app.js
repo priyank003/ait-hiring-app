@@ -9,6 +9,9 @@ const User = require("./models/user/user.mongo");
 const session = require("express-session");
 const passportSetup = require("./passport");
 const flash = require("connect-flash");
+const morgan = require("morgan");
+
+app.use(morgan("dev"));
 
 app.use(
   cors({

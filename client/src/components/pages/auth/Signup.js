@@ -209,7 +209,7 @@ const Signup = (props) => {
                 <div className={`${classes["input_field"]}`}>
                   <input
                     type="email"
-                    placeholder="AIT email"
+                    placeholder="email"
                     onChange={emailChangeHandler}
                     value={enteredEmail}
                     className={

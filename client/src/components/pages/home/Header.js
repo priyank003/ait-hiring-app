@@ -19,7 +19,7 @@ const Header = (props) => {
               <img src={AIT} alt="" />
             </div>
 
-            <h1>AIT Hiring App</h1>
+            <h1>AIT Hiring</h1>
           </div>
         </Link>
 

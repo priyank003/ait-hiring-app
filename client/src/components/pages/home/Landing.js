@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Landing.module.css";
-import college from "../../../assets/images/ait2.55aa091d.webp";
+import college from "../../../assets/images/college_graphic.png";
 import greenCurve from "../../../assets/logos/green-curve.svg";
 import imgResume from "../../../assets/logos/resume.svg";
 import imgId from "../../../assets/logos/id.svg";
@@ -14,6 +14,7 @@ import amazon from "../../../assets/logos/Amazon_(company)-Logo.wine.svg";
 import accenture from "../../../assets/logos/Accenture-logo.png";
 import deutsche from "../../../assets/logos/399-3994348_deutsche-bank-logo-png-transparent-png.png";
 import Footer from "./Footer";
+import univImg from "../../../assets/images/istockphoto-1045222274-612x612.jpg";
 
 const Landing = () => {
   return (
@@ -28,8 +29,8 @@ const Landing = () => {
           </div>
           <div className={classes["landing-desc"]}>
             <p>
-              Let us Match you with top Ait Alumni Startups <br /> looking to hire
-              highly skilled Developers
+              Let us Match you with top University Alumni Startups <br />{" "}
+              looking to hire highly skilled Developers
             </p>
           </div>
           <div className={classes["landing-links"]}>
@@ -39,19 +40,8 @@ const Landing = () => {
           </div>
         </div>
         <div className={classes["landing-right"]}>
-          <div className={classes["icons-wrap"]}>
-            <img src={imgResume} alt="" className={classes["img-Resume"]} />
-            <img src={imgId} alt="" className={classes["img-Id"]} />
-            <img src={redChat} alt="" className={classes["img-RedChat"]} />
-            <img
-              src={yellowChat}
-              alt=""
-              className={classes["img-YellowChat"]}
-            />
-
-            <div className={classes["img-wrap"]}>
-              <img src={college} alt="" className={classes.imgCollege}></img>
-            </div>
+          <div className={classes["img-wrap"]}>
+            <img src={college} alt="" className={classes.imgCollege}></img>
           </div>
 
           <div className={classes["landing-right-footer-mobile"]}>
@@ -61,7 +51,7 @@ const Landing = () => {
       </div>
 
       <div className={classes["landing-placements"]}>
-        <h1>Our students succesfully placed at</h1>
+        <h1>Prominent Recruiters</h1>
 
         <div className={classes["company-icon"]}>
           <div className={classes["icon-wrap"]}>
@@ -85,8 +75,6 @@ const Landing = () => {
           </div>
         </div>
       </div>
-
-     
     </div>
   );
 };

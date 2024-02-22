@@ -43,7 +43,7 @@ const DashBoardNav = ({ onDrawerOpen, onDrawerClose, open }) => {
     <div className={classes.dashBoardNav}>
       <div className={classes["nav-top"]}>
         <div className={classes["dashboard-nav-header"]}>
-          <img src={AIT} alt="" />
+          {/* <img src={AIT} alt="" /> */}
           <h1>Hiring Cell</h1>
           {width < 1200 && (
             <IconButton onClick={handleDrawerClose}>
