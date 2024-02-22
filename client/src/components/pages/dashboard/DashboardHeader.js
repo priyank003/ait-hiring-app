@@ -100,6 +100,7 @@ const DashboardHeader = ({ onDrawerOpen, onDrawerClose, open }) => {
 
   const userInfo = useSelector((state) => state.userInfo);
 
+ 
   return (
     <div className={classes["dashboard-main-header"]}>
       <div className={classes["header-top"]}>

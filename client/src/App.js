@@ -87,8 +87,6 @@ function App() {
     localStorage.removeItem("userData");
   }, []);
 
-  console.log("priyank");
-
   return (
     <AuthContext.Provider
       value={{ isLoggedIn: !!token, userId, token, login, logout }}

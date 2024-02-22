@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 // app.use(helmet());
 app.use(express.urlencoded());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "..","..", "client","build")));
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.use(flash());
 

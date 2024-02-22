@@ -240,23 +240,25 @@ export default function Chat() {
     getAdminUsers();
   }, []);
 
+  console.log("cuuur", currentChat);
+
   return (
-    <div className="chat__container">
+    <div className="chat__page">
       <Grid container className="chat__container">
         {width > 600 ? (
           <>
             {" "}
-            <Grid sm={4}>
+            <Grid sm={4} sx={{ height: "100%" }}>
               {" "}
               <div className="chat__online">
-                {" "}
                 <h3 style={{ borderBottom: "1px solid" }}>Users available</h3>
                 <List
                   sx={{
-                    width: "100%",
                     maxWidth: 360,
                     bgcolor: "background.paper",
                     paddingTop: "0",
+
+                    overflowY: "auto",
                   }}
                 >
                   {/* {users.length > 0
@@ -284,21 +286,27 @@ export default function Chat() {
                 </List>
               </div>
             </Grid>
-            <Grid sm={8}>
+            <Grid sm={8} sx={{ height: "100%" }}>
               <div className="chat__section">
-                {currentChat ? (
+                {currentChat._id ? (
                   <>
                     <h3 style={{ borderBottom: "1px solid " }}>
                       {receiver.username ? receiver.username : "Chat Section"}
                     </h3>
 
-                    <Box sx={{ height: "80%" }}>
+                    <Box
+                      sx={{
+                        height: "80%",
+                        overflow: "hidden",
+                      }}
+                    >
                       <List
                         sx={{
+                          height: "100%",
+                          overflowY: "auto",
                           width: "100%",
                           bgcolor: "##f9f9f9",
                           paddingTop: "0",
-                          overflowY: "auto",
                           padding: "0 10px",
                         }}
                         className="chat__section-content"
@@ -340,7 +348,7 @@ export default function Chat() {
         ) : (
           <>
             {mobileChat ? (
-              <Grid sm={4} xs={12}>
+              <Grid sm={4} xs={12} sx={{ height: "100%" }}>
                 {" "}
                 <div className="chat__online">
                   {" "}
@@ -383,7 +391,7 @@ export default function Chat() {
                 </div>
               </Grid>
             ) : (
-              <Grid sm={8} xs={12}>
+              <Grid sm={8} xs={12} sx={{ height: "100%" }}>
                 <div className="chat__section">
                   {currentChat ? (
                     <>
@@ -409,7 +417,7 @@ export default function Chat() {
                         </Grid>
                       </Grid>
 
-                      <Box sx={{ height: "80%" }}>
+                      <Box sx={{ height: "80%", overflow: "hidden" }}>
                         <List
                           sx={{
                             width: "100%",

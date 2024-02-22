@@ -1,5 +1,7 @@
 FROM node:lts-alpine
 
+RUN mkdir /app && chown node:node /app
+
 WORKDIR /app
 
 COPY package*.json ./
@@ -13,12 +15,14 @@ RUN npm run install-server  --omit=dev
 
 
 COPY client/ client/
-# RUN npm run build --prefix client
-# RUN ls -la /app/client 
 
 COPY server/ server/
 
-# USER node
+RUN mkdir /app/server/public && chown node:node /app/server/public
+RUN chown node:node /app/client
+RUN chown node:node /app/client/node_modules
+
+USER node
 
 CMD [ "npm", "run", "deploy" ]
 
