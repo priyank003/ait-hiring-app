@@ -20,6 +20,8 @@ COPY server/ server/
 
 USER node
 
+RUN chmod 755 /app/server 
+
 CMD [ "npm", "run", "deploy" ]
 
 EXPOSE 8000
