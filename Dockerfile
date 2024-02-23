@@ -18,7 +18,7 @@ COPY client/ client/
 
 COPY server/ server/
 
-RUN mkdir /app/server/public && chown node:node /app/server/public
+RUN chown node:node /app/server/public
 RUN chown node:node /app/client
 RUN chown node:node /app/client/node_modules
 
