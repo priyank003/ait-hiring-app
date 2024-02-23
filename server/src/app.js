@@ -43,7 +43,6 @@ app.use((req, res, next) => {
 // app.use(helmet());
 app.use(express.urlencoded());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.use(flash());
 
@@ -78,6 +77,11 @@ app.use("/api/message", messageRouter);
 
 app.get("/api/hello", (req, res) => {
   res.send("hello world");
+});
+
+app.use(express.static(path.join(__dirname, "..", "public")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 
 module.exports = app;
