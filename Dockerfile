@@ -24,6 +24,6 @@ RUN chown node:node /app/client/node_modules
 
 USER node
 
-CMD [ "npm", "run", "deploy" ]
+CMD [ "npm", "run", "server" ]
 
 EXPOSE 8000
