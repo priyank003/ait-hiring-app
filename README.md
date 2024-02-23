@@ -1,6 +1,6 @@
 # ait-hiring-app
 
-<a href="http://65.0.80.30:8000/">Live link</a> deployed using docker , AWS Ec2 instance
+<a href="https://ait-hiring-app.onrender.com">Live link</a> deployed on render 
 
 ![image](https://user-images.githubusercontent.com/79754424/197125537-f023687d-b5e2-48a3-b5cf-e31d820be615.png)
 
