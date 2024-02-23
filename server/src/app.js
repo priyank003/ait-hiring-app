@@ -80,10 +80,4 @@ app.get("/api/hello", (req, res) => {
   res.send("hello world");
 });
 
-app.get("/*", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "..", "public", "index.html")
-  );
-});
-
 module.exports = app;
